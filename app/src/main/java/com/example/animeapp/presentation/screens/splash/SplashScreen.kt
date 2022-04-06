@@ -1,5 +1,6 @@
 package com.example.animeapp.presentation.screens.splash
 
+<<<<<<< HEAD
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -134,3 +135,12 @@ fun SplashScreenDarkPreview() {
 
 
 
+=======
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+
+@Composable
+fun SplashScreen(navController: NavHostController) {
+
+}
+>>>>>>> dcb5e9f101420ddaa793a1d2c26c3a5aae44c30a

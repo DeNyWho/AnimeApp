@@ -13,7 +13,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+<<<<<<< HEAD
 import com.example.animeapp.navigation.SetupNavGraph
+=======
+>>>>>>> dcb5e9f101420ddaa793a1d2c26c3a5aae44c30a
 import com.example.animeapp.ui.theme.AnimeAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,8 +29,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AnimeAppTheme {
+<<<<<<< HEAD
                 navController = rememberNavController()
                 SetupNavGraph(navController = navController)
+=======
+
+                navController = rememberNavController()
+>>>>>>> dcb5e9f101420ddaa793a1d2c26c3a5aae44c30a
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.example.animeapp.presentation.screens.welcome
 
+<<<<<<< HEAD
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animeapp.domain.use_cases.UseCases
@@ -25,3 +26,7 @@ import javax.inject.Inject
 //        }
 //    }
 //}
+=======
+class WelcomeScreenViewModel {
+}
+>>>>>>> dcb5e9f101420ddaa793a1d2c26c3a5aae44c30a
