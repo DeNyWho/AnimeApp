@@ -1,5 +1,6 @@
 package com.example.animeapp.presentation.screens.splash
 
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animeapp.domain.use_cases.UseCases
