@@ -11,18 +11,14 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-//@HiltViewModel
-//class WelcomeScreenViewModel @Inject constructor(
-//    private val useCases: UseCases
-//): ViewModel() {
-//
-//    private val _onBoardingCompleted = MutableStateFlow(false)
-//    val onBoardingCompleted: StateFlow<Boolean> = _onBoardingCompleted
-//
-//    init {
-//        viewModelScope.launch (Dispatchers.IO) {
-//            _onBoardingCompleted.value =
-//                useCases
-//        }
-//    }
-//}
+@HiltViewModel
+class WelcomeScreenViewModel @Inject constructor(
+    private val useCases: UseCases
+): ViewModel() {
+
+    fun saveOnBoardingState(completed: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            useCases.saveOnBoardingUseCase(completed = completed)
+        }
+    }
+}

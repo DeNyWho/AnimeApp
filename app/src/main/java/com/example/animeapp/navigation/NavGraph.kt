@@ -9,28 +9,26 @@ import com.example.animeapp.presentation.screens.profile.ProfileScreen
 import com.example.animeapp.presentation.screens.splash.SplashScreen
 import com.example.animeapp.presentation.screens.welcome.WelcomeScreen
 
+
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
 
     NavHost(
         navController = navController,
         startDestination = Screen.Splash.route
-    ) {
-        composable(route = Screen.Splash.route) {
+    ){
+
+        composable(route = Screen.Splash.route){
             SplashScreen(navController = navController)
         }
 
-        composable(route = Screen.Welcome.route) {
+        composable(route = Screen.Welcome.route){
             WelcomeScreen(navController = navController)
         }
 
-        composable(route = Screen.Welcome.route) {
+        composable(route = Screen.Home.route) {
             HomeScreen(navController = navController)
         }
+    }
 
-        composable(route = Screen.Welcome.route) {
-            ProfileScreen(navController = navController)
-        }
-     }
-    
 }

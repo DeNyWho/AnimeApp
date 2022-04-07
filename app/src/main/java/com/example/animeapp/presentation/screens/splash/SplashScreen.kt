@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.animeapp.R
 import com.example.animeapp.navigation.Screen
@@ -29,7 +30,7 @@ import com.example.animeapp.ui.theme.Purple700
 
 @Composable
 fun SplashScreen(
-    navController: NavHostController,
+    navController: NavController,
     splashViewModel: SplashViewModel = hiltViewModel()
 ) {
 
@@ -46,7 +47,7 @@ fun SplashScreen(
             )
         )
         navController.popBackStack()
-        if(onBoardingCompleted) {
+        if(!onBoardingCompleted) {
             navController.navigate(Screen.Welcome.route)
         } else {
             navController.navigate(Screen.Welcome.route)
