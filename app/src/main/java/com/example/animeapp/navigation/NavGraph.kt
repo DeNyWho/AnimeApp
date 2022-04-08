@@ -5,7 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.animeapp.presentation.screens.home.HomeScreen
-import com.example.animeapp.presentation.screens.profile.ProfileScreen
+import com.example.animeapp.presentation.screens.login.Login
+import com.example.animeapp.presentation.screens.signUp.SignUp
 import com.example.animeapp.presentation.screens.splash.SplashScreen
 import com.example.animeapp.presentation.screens.welcome.WelcomeScreen
 
@@ -28,6 +29,14 @@ fun SetupNavGraph(navController: NavHostController) {
 
         composable(route = Screen.Home.route) {
             HomeScreen(navController = navController)
+        }
+
+        composable(route = Screen.Login.route) {
+            Login(navController = navController)
+        }
+
+        composable(route = Screen.SignUp.route) {
+            SignUp(navController = navController)
         }
     }
 

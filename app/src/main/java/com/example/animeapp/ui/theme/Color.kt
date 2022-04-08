@@ -9,6 +9,8 @@ val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF1feeec)
 val lightGray = Color(0xFF74777d)
+val buttonSignUp = Color(0xFFf32a30)
+val borderLogin = Color(0xFFe8e8e8)
 
 
 val Colors.inactiveIndicatorColor
