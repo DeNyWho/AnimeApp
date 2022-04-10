@@ -9,19 +9,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.animeapp.R
 import com.example.animeapp.domain.model.OnBoardingPage
 import com.example.animeapp.navigation.Screen
-import com.example.animeapp.ui.theme.activeIndicatorColor
-import com.example.animeapp.ui.theme.borderLogin
-import com.example.animeapp.ui.theme.buttonSignUp
-import com.example.animeapp.ui.theme.inactiveIndicatorColor
+import com.example.animeapp.ui.theme.*
 import com.example.animeapp.util.Constants.ON_BOARDING_PAGE_COUNT
 import com.google.accompanist.pager.*
 
@@ -40,94 +43,34 @@ fun WelcomeScreen(
 
     val pagerState = rememberPagerState()
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        
+
         HorizontalPager(
-            modifier = Modifier.weight(10f),
             state = pagerState,
             count = ON_BOARDING_PAGE_COUNT,
             verticalAlignment = Alignment.Top
         ) {
             BodySection(
-                navController = navController,
-                welcomeScreenViewModel = welcomeScreenViewModel,
                 pagerState = pagerState,
                 onBoardingPage = pages[it]
             )
         }
-    }
-
-}
-
-@OptIn(ExperimentalPagerApi::class)
-@Composable
-fun BodySection(
-    navController: NavHostController,
-    welcomeScreenViewModel: WelcomeScreenViewModel,
-    pagerState: PagerState,
-    onBoardingPage: OnBoardingPage
-) {
-
-    val color = if (isSystemInDarkTheme()) {
-        Color.Black
-    } else Color.White
-
-    val textColor = if(isSystemInDarkTheme()){
-        Color.White
-    } else Color.Black
-
-    val pages = listOf(
-        OnBoardingPage.First,
-        OnBoardingPage.Second,
-        OnBoardingPage.Third
-    )
-
-    val scope = rememberCoroutineScope()
-
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color)
-    ) {
-        if(!isSystemInDarkTheme()) {
-
-            Column(
-                modifier = Modifier.align(Alignment.Center),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = onBoardingPage.title,
-                    fontSize = 25.sp,
-                    color = textColor
-                )
-                Text(
-                    text = onBoardingPage.description,
-                    fontSize = 25.sp,
-                    color = textColor
-                )
-                HorizontalPagerIndicator(
-                    pagerState = pagerState,
-                    inactiveColor = MaterialTheme.colors.inactiveIndicatorColor,
-                    activeColor = MaterialTheme.colors.activeIndicatorColor,
-                    modifier = Modifier
-                )
-            }
-
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight(0.22f)
-                    .padding(50.dp, 0.dp, 50.dp, 20.dp)
-                    .align(Alignment.BottomCenter),
-                verticalArrangement = Arrangement.spacedBy(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+        Column(
+            modifier = Modifier
+                .fillMaxHeight(0.2f)
+                .padding(50.dp, 0.dp, 50.dp, 20.dp)
+                .align(Alignment.BottomCenter),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            if (!isSystemInDarkTheme()) {
                 Button(
                     onClick = { navController.navigate(Screen.SignUp.route) },
                     Modifier
+                        .fillMaxHeight()
                         .weight(1f)
                         .fillMaxWidth(),
                     colors = ButtonDefaults.textButtonColors(
@@ -144,6 +87,7 @@ fun BodySection(
                 Button(
                     onClick = { navController.navigate(Screen.SignUp.route) },
                     Modifier
+                        .fillMaxHeight()
                         .weight(1f)
                         .fillMaxWidth(),
                     border = BorderStroke(1.dp, borderLogin),
@@ -158,20 +102,12 @@ fun BodySection(
                         fontSize = 17.sp
                     )
                 }
-            }
-        } else {
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight(0.22f)
-                    .padding(50.dp, 0.dp, 50.dp, 20.dp)
-                    .align(Alignment.BottomCenter),
-                verticalArrangement = Arrangement.spacedBy(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            } else {
 
                 Button(
                     onClick = { navController.navigate(Screen.SignUp.route) },
                     Modifier
+                        .fillMaxHeight()
                         .weight(1f)
                         .fillMaxWidth(),
                     colors = ButtonDefaults.textButtonColors(
@@ -188,6 +124,7 @@ fun BodySection(
                 Button(
                     onClick = { navController.navigate(Screen.SignUp.route) },
                     Modifier
+                        .fillMaxHeight()
                         .weight(1f)
                         .fillMaxWidth(),
                     border = BorderStroke(1.dp, Color.White),
@@ -204,142 +141,126 @@ fun BodySection(
                 }
             }
         }
-
-//        TextButton(
-//            onClick = { navController.navigate(Screen.Home.route) },
-//            modifier = Modifier
-//                .padding(10.dp)
-//                .align(Alignment.TopEnd)
-//        ) {
-//            Text(
-//                text = "Skip",
-//                fontSize = 20.sp,
-//                color = Color.White,
-//            )
-//        }
-//        Row(modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(4.dp),
-//            horizontalArrangement = Arrangement.SpaceEvenly
-//        ) {
-//            Card(
-//                shape = RoundedCornerShape(20.dp),
-//                modifier = Modifier
-//                    .padding(12.dp)
-//                    .fillMaxSize(0.4f)
-//            ) {
-//                Image(
-//                    painter = painterResource(id = onBoardingPage.image),
-//                    contentScale = ContentScale.Crop,
-//                    contentDescription = null
-//                )
-//            }
-//            Card(
-//                modifier = Modifier
-//                    .fillMaxSize(0.4f)
-//                    .padding(12.dp),
-//                shape = RoundedCornerShape(20.dp)
-//            ) {
-//                Image(
-//                    painter = painterResource(id = onBoardingPage.image),
-//                    contentScale = ContentScale.Crop,
-//                    contentDescription = null
-//                )
-//            }
-//            Card(
-//                modifier = Modifier
-//                    .fillMaxSize(0.4f)
-//                    .padding(12.dp),
-//                shape = RoundedCornerShape(20.dp)
-//            ) {
-//                Image(
-//                    painter = painterResource(id = onBoardingPage.image),
-//                    contentScale = ContentScale.Crop,
-//                    contentDescription = null
-//                )
-//            }
     }
-//        Row(
-//            modifier = Modifier
-//                .fillMaxSize(0.3f)
-////                .padding(15.dp, 10.dp, 0.dp, 0.dp)
-//        ) {
-////            Card(
-////                modifier = Modifier
-////                    .height(200.dp)
-////                    .width(150.dp),
-////                shape = RoundedCornerShape(20.dp)
-////            ) {
-//                Image(
-//                    painter = painterResource(id = onBoardingPage.image),
-//
-//                    contentScale = ContentScale.Crop,
-//                    contentDescription = null
-//                )
-////            }
-//
-////            Card(
-////                modifier = Modifier
-////                    .height(200.dp)
-////                    .width(150.dp),
-////                  shape = RoundedCornerShape(20.dp)
-////            ) {
-//                Image(
-//                    painter = painterResource(id = onBoardingPage.image),
-//
-//                    contentScale = ContentScale.Crop,
-//                    contentDescription = null
-//                )
-////            }
-//
-////            Card(
-////                modifier = Modifier
-////                    .height(200.dp)
-////                    .width(150.dp),
-////                shape = RoundedCornerShape(20.dp)
-////            ) {
-//                Image(
-//                    painter = painterResource(id = onBoardingPage.image),
-//
-//                    contentScale = ContentScale.Crop,
-//                    contentDescription = null
-//                )
-////            }
-//
-//        }
-////        Card(
-////            modifier = Modifier
-////                .fillMaxWidth()
-////                .fillMaxHeight(0.25f)
-////                .align(Alignment.BottomCenter),
-////            shape = RoundedCornerShape(25.dp, 25.dp, 0.dp, 0.dp)
-////        ) {
-////            Text(
-////                text = onBoardingPage.title,
-////                fontSize = 20.sp,
-////                color = Color.Black,
-////                modifier = Modifier
-////                    .align(Alignment.TopStart)
-////                    .padding(15.dp)
-////            )
-////            Text(
-////                text = onBoardingPage.description,
-////                fontSize = 20.sp,
-////                color = Color.Black,
-////                modifier = Modifier
-////                    .align(Alignment.TopStart)
-////                    .padding(15.dp, 50.dp, 0.dp, 0.dp)
-////            )
-////        }
-////        Text(
-////            text = "Skip",
-////            fontSize = 20.sp,
-////            color = Color.Black,
-////            modifier = Modifier
-////                .align(Alignment.TopEnd)
-////                .padding(15.dp)
-////        )
+}
 
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun BodySection(
+    pagerState: PagerState,
+    onBoardingPage: OnBoardingPage
+) {
+
+    val color = if (isSystemInDarkTheme()) {
+        Color.Black
+    } else Color.White
+
+    val textColor = if (isSystemInDarkTheme()) {
+        Color.White
+    } else Color.Black
+
+    val deskColor = if(isSystemInDarkTheme()){
+        backText
+    } else Color.Black
+
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color)
+    ) {
+        if (!isSystemInDarkTheme()) {
+            val shaping = RoundedCornerShape(10.dp)
+            Column(modifier = Modifier.fillMaxSize()) {
+                Row {
+                    Card(
+                        shape = shaping,
+                        modifier = Modifier
+                            .clip(shape = shaping)
+                            .padding(5.dp)
+                            .fillMaxSize(0.20f)
+                            .weight(1f)
+                            .rotate(-5f),
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.petgirl),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .fillMaxSize(),
+                            contentScale = ContentScale.Crop,
+                        )
+                    }
+
+                }
+            }
+
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.onboarding1v1a),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize(0.2f)
+                )
+                Text(
+                    text = onBoardingPage.title,
+                    fontSize = 24.sp,
+                    color = textColor,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = onBoardingPage.description,
+                    fontSize = 20.sp,
+                    color = deskColor,
+                    textAlign = TextAlign.Center
+                )
+                HorizontalPagerIndicator(
+                    pagerState = pagerState,
+                    inactiveColor = MaterialTheme.colors.inactiveIndicatorColor,
+                    activeColor = MaterialTheme.colors.activeIndicatorColor,
+                    modifier = Modifier.padding(40.dp),
+                    spacing = 20.dp
+                )
+            }
+        } else {
+            Column {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.onboarding1v1b),
+                        contentDescription = null
+                    )
+                    Text(
+                        text = onBoardingPage.title,
+                        fontSize = 30.sp,
+                        color = textColor,
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = onBoardingPage.description,
+                        fontSize = 18.sp,
+                        color = deskColor,
+                        textAlign = TextAlign.Center
+                    )
+                    HorizontalPagerIndicator(
+                        pagerState = pagerState,
+                        inactiveColor = MaterialTheme.colors.inactiveIndicatorColor,
+                        activeColor = MaterialTheme.colors.activeIndicatorColor,
+                        modifier = Modifier.padding(40.dp),
+                        spacing = 20.dp
+                    )
+                }
+            }
+        }
+    }
 }
 
 
