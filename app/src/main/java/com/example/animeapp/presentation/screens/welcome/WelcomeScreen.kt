@@ -1,21 +1,19 @@
 package com.example.animeapp.presentation.screens.welcome
 
-import android.view.Gravity
-import androidx.compose.foundation.*
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -77,7 +75,10 @@ fun WelcomeScreen(
                     spacing = 20.dp
                 )
                 Button(
-                    onClick = { navController.navigate(Screen.SignUp.route) },
+                    onClick = {
+                        welcomeScreenViewModel.saveOnBoardingState(true)
+                        navController.navigate(Screen.SignUp.route)
+                    },
                     Modifier
                         .fillMaxHeight()
                         .weight(1f)
@@ -94,7 +95,10 @@ fun WelcomeScreen(
                     )
                 }
                 Button(
-                    onClick = { navController.navigate(Screen.SignUp.route) },
+                    onClick = {
+                        welcomeScreenViewModel.saveOnBoardingState(true)
+                        navController.navigate(Screen.SignUp.route)
+                    },
                     Modifier
                         .fillMaxHeight()
                         .weight(1f)
@@ -120,7 +124,10 @@ fun WelcomeScreen(
                     spacing = 20.dp
                 )
                 Button(
-                    onClick = { navController.navigate(Screen.SignUp.route) },
+                    onClick = {
+                        welcomeScreenViewModel.saveOnBoardingState(true)
+                        navController.navigate(Screen.SignUp.route)
+                    },
                     Modifier
                         .fillMaxHeight()
                         .weight(1f)
@@ -137,7 +144,10 @@ fun WelcomeScreen(
                     )
                 }
                 Button(
-                    onClick = { navController.navigate(Screen.SignUp.route) },
+                    onClick = {
+                        welcomeScreenViewModel.saveOnBoardingState(true)
+                        navController.navigate(Screen.SignUp.route)
+                    },
                     Modifier
                         .fillMaxHeight()
                         .weight(1f)

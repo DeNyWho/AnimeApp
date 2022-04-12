@@ -50,7 +50,7 @@ fun SplashScreen(
         if(!onBoardingCompleted) {
             navController.navigate(Screen.Welcome.route)
         } else {
-            navController.navigate(Screen.Welcome.route)
+            navController.navigate(Screen.Login.route)
         }
     }
 
