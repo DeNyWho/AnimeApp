@@ -208,7 +208,9 @@ fun SignUp(navController: NavHostController) {
 
             Button(
                 onClick = {
-/*TODO{ Here need action on login button }*/
+                          if(name.text.isNotEmpty() && password.text.isNotEmpty() && confirmPassword.text.isNotEmpty() && email.text.isNotEmpty()) {
+                              /* Todo{ Auth actions}*/
+                          }
                 },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.textButtonColors(
