@@ -14,6 +14,10 @@ val indicator = Color(0xFF3d3d3d)
 val buttonSignUp = Color(0xFFf32a30)
 val borderLogin = Color(0xFFe8e8e8)
 val backText = Color(0xFFb0b0b0)
+val orange = Color(0xFFf76743)
+val lighterGray = Color(0xFFf5f5f5)
+val Gray = Color(0xFFc4c4c4)
+val bluer = Color(0xFF7579b5)
 
 val Colors.inactiveIndicatorColor
 @Composable
