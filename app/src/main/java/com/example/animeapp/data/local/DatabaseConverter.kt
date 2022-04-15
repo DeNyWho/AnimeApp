@@ -1,7 +1,6 @@
 package com.example.animeapp.data.local
 
 import androidx.room.TypeConverter
-import java.lang.StringBuilder
 
 class DatabaseConverter {
 

@@ -4,7 +4,10 @@ pluginManagement {
         google()
         mavenCentral()
         maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
-
+        maven { url = uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven") }
+        maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap/io/ktor/ktor-locations/2.0.0-eap-278/") }
+        maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap/io/ktor/ktor-locations/") }
+        maven {url = uri("https://mvnrepository.com/artifact/org.jetbrains.exposed/exposed-core")}
     }
 }
 dependencyResolutionManagement {
