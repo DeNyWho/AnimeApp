@@ -26,6 +26,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -39,6 +40,12 @@ import com.example.animeapp.ui.theme.orange
 //navController: NavHostController
 @Composable
 fun Login(navController: NavHostController) {
+
+}
+
+@Preview
+@Composable
+fun PreviewLogin() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -221,7 +228,7 @@ fun Login(navController: NavHostController) {
                             disabledContentColor = Color.Transparent
                         ),
                         onClick = {
-                            navController.navigate(Screen.SignUp.route)
+//                            navController.navigate(Screen.SignUp.route)
                         }
                     ) {
                         Text(text = "Register", color = orange)
