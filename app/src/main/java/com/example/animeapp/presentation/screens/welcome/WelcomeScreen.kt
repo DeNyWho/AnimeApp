@@ -27,6 +27,7 @@ import com.example.animeapp.navigation.Screen
 import com.example.animeapp.ui.theme.*
 import com.example.animeapp.util.Constants.ON_BOARDING_PAGE_COUNT
 import com.google.accompanist.pager.*
+import javax.annotation.meta.When
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -185,7 +186,7 @@ fun BodySection(
         Color.White
     } else Color.Black
 
-    val deskColor = if(isSystemInDarkTheme()){
+    val deskColor = if (isSystemInDarkTheme()) {
         backText
     } else Color.Black
 
@@ -196,357 +197,359 @@ fun BodySection(
             .background(color)
     ) {
 //        if(pagerState.currentPage == 0) {
-            if (!isSystemInDarkTheme()) {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .rotate(-7f)
-                ) {
-                    Row(modifier = Modifier.padding(start = 20.dp)) {
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .fillMaxWidth(0.25f)
-                                .fillMaxHeight(0.16f)
-                                .graphicsLayer(
-                                    translationY = -55F
-                                )
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.farfor),
-                                contentDescription = null,
+        when(pagerState.currentPage) {
+            0 -> {
+                if (!isSystemInDarkTheme()) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .rotate(-7f)
+                    ) {
+                        Row(modifier = Modifier.padding(start = 20.dp)) {
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.16f)
+                                    .graphicsLayer(
+                                        translationY = -55F
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.farfor),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -95F,
+                                        translationX = 45f
+                                    )
+                                    .fillMaxSize(0.25f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.tokyoone),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            // reworked
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 95f
+                                    )
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.16f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.name),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxSize(0.25f)
+                                    .padding(start = 10.dp)
+                                    .graphicsLayer(
+                                        translationY = -95F,
+                                        translationX = 115f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.titans),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
                         }
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .graphicsLayer(
-                                    translationY = -95F,
-                                    translationX = 45f
-                                )
-                                .fillMaxSize(0.25f)
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.tokyoone),
-                                contentDescription = null,
+                        Row(modifier = Modifier.padding(start = 20.dp)) {
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                        // reworked
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .graphicsLayer(
-                                    translationY = -55F,
-                                    translationX = 95f
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.35f)
+                                    .graphicsLayer(
+                                        translationY = -215F,
+                                        translationX = 5f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.voleyball),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
                                 )
-                                .fillMaxWidth(0.25f)
-                                .fillMaxHeight(0.16f)
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.name),
-                                contentDescription = null,
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .fillMaxSize(0.25f)
-                                .padding(start = 10.dp)
-                                .graphicsLayer(
-                                    translationY = -95F,
-                                    translationX = 115f
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 45f
+                                    )
+                                    .fillMaxHeight(0.25f)
+                                    .fillMaxWidth(0.35f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.toradora),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
                                 )
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.titans),
-                                contentDescription = null,
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                    }
-                    Row(modifier = Modifier.padding(start = 20.dp)) {
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .fillMaxWidth(0.25f)
-                                .fillMaxHeight(0.35f)
-                                .graphicsLayer(
-                                    translationY = -215F,
-                                    translationX = 5f
+                                    .graphicsLayer(
+                                        translationY = -225F,
+                                        translationX = 95f
+                                    )
+                                    .fillMaxWidth(0.40f)
+                                    .fillMaxHeight(0.35f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.drstone),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
                                 )
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.voleyball),
-                                contentDescription = null,
+                            }
+                            // reworked
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .graphicsLayer(
-                                    translationY = -55F,
-                                    translationX = 45f
+                                    .fillMaxSize(0.25f)
+                                    .padding(start = 10.dp)
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 115f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.hero),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
                                 )
-                                .fillMaxHeight(0.25f)
-                                .fillMaxWidth(0.35f)
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.toradora),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .graphicsLayer(
-                                    translationY = -225F,
-                                    translationX = 95f
-                                )
-                                .fillMaxWidth(0.40f)
-                                .fillMaxHeight(0.35f)
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.drstone),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                        // reworked
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .fillMaxSize(0.25f)
-                                .padding(start = 10.dp)
-                                .graphicsLayer(
-                                    translationY = -55F,
-                                    translationX = 115f
-                                )
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.hero),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                    }
-                }
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.onboarding1v1a),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize(0.2f),
-                        alignment = Alignment.BottomCenter
-                    )
-                    Text(
-                        text = onBoardingPage.title,
-                        fontSize = 24.sp,
-                        color = textColor,
-                        textAlign = TextAlign.Center,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = onBoardingPage.description,
-                        fontSize = 20.sp,
-                        color = deskColor,
-                        textAlign = TextAlign.Center
-                    )
-                }
-            } else {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .rotate(-7f)
-                ) {
-                    Row(modifier = Modifier.padding(start = 20.dp)) {
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .fillMaxWidth(0.25f)
-                                .fillMaxHeight(0.16f)
-                                .graphicsLayer(
-                                    translationY = -55F
-                                )
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.farfor),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .graphicsLayer(
-                                    translationY = -95F,
-                                    translationX = 45f
-                                )
-                                .fillMaxSize(0.25f)
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.tokyoone),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                        // reworked
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .graphicsLayer(
-                                    translationY = -55F,
-                                    translationX = 95f
-                                )
-                                .fillMaxWidth(0.25f)
-                                .fillMaxHeight(0.16f)
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.name),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .fillMaxSize(0.25f)
-                                .padding(start = 10.dp)
-                                .graphicsLayer(
-                                    translationY = -95F,
-                                    translationX = 115f
-                                )
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.titans),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
+                            }
                         }
                     }
-                    Row(modifier = Modifier.padding(start = 20.dp)) {
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .fillMaxWidth(0.25f)
-                                .fillMaxHeight(0.35f)
-                                .graphicsLayer(
-                                    translationY = -215F,
-                                    translationX = 5f
-                                )
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.voleyball),
-                                contentDescription = null,
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.onboarding1v1a),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize(0.2f),
+                            alignment = Alignment.BottomCenter
+                        )
+                        Text(
+                            text = onBoardingPage.title,
+                            fontSize = 24.sp,
+                            color = textColor,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = onBoardingPage.description,
+                            fontSize = 20.sp,
+                            color = deskColor,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .rotate(-7f)
+                    ) {
+                        Row(modifier = Modifier.padding(start = 20.dp)) {
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.16f)
+                                    .graphicsLayer(
+                                        translationY = -55F
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.farfor),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -95F,
+                                        translationX = 45f
+                                    )
+                                    .fillMaxSize(0.25f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.tokyoone),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            // reworked
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 95f
+                                    )
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.16f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.name),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxSize(0.25f)
+                                    .padding(start = 10.dp)
+                                    .graphicsLayer(
+                                        translationY = -95F,
+                                        translationX = 115f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.titans),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
                         }
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .graphicsLayer(
-                                    translationY = -55F,
-                                    translationX = 45f
-                                )
-                                .fillMaxHeight(0.25f)
-                                .fillMaxWidth(0.35f)
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.toradora),
-                                contentDescription = null,
+                        Row(modifier = Modifier.padding(start = 20.dp)) {
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .graphicsLayer(
-                                    translationY = -225F,
-                                    translationX = 95f
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.35f)
+                                    .graphicsLayer(
+                                        translationY = -215F,
+                                        translationX = 5f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.voleyball),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
                                 )
-                                .fillMaxWidth(0.40f)
-                                .fillMaxHeight(0.35f)
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.drstone),
-                                contentDescription = null,
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                        // reworked
-                        Card(
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier
-                                .fillMaxSize(0.25f)
-                                .padding(start = 10.dp)
-                                .graphicsLayer(
-                                    translationY = -55F,
-                                    translationX = 115f
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 45f
+                                    )
+                                    .fillMaxHeight(0.25f)
+                                    .fillMaxWidth(0.35f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.toradora),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
                                 )
-                                .weight(1f),
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.hero),
-                                contentDescription = null,
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
                                 modifier = Modifier
-                                    .fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
+                                    .graphicsLayer(
+                                        translationY = -225F,
+                                        translationX = 95f
+                                    )
+                                    .fillMaxWidth(0.40f)
+                                    .fillMaxHeight(0.35f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.drstone),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            // reworked
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxSize(0.25f)
+                                    .padding(start = 10.dp)
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 115f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.hero),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
                         }
                     }
-                }
                     Column(
                         modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally,
@@ -572,7 +575,387 @@ fun BodySection(
                             textAlign = TextAlign.Center
                         )
                     }
-//            }
+                }
+        }
+            1 -> {
+                if (!isSystemInDarkTheme()) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .rotate(-7f)
+                    ) {
+                        Row(modifier = Modifier.padding(start = 20.dp)) {
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.16f)
+                                    .graphicsLayer(
+                                        translationY = -55F
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.mangas_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -95F,
+                                        translationX = 45f
+                                    )
+                                    .fillMaxSize(0.25f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.catmanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            // reworked
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 95f
+                                    )
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.16f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.dragonmanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxSize(0.25f)
+                                    .padding(start = 10.dp)
+                                    .graphicsLayer(
+                                        translationY = -95F,
+                                        translationX = 115f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.moonmanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                        }
+                        Row(modifier = Modifier.padding(start = 20.dp)) {
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.35f)
+                                    .graphicsLayer(
+                                        translationY = -215F,
+                                        translationX = 5f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.tokyoghoulmanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 45f
+                                    )
+                                    .fillMaxHeight(0.25f)
+                                    .fillMaxWidth(0.35f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.toradoramanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -225F,
+                                        translationX = 95f
+                                    )
+                                    .fillMaxWidth(0.40f)
+                                    .fillMaxHeight(0.35f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.voleyballmanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            // reworked
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxSize(0.25f)
+                                    .padding(start = 10.dp)
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 115f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.yournamemanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                        }
+                    }
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.onboarding1v1a),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize(0.2f),
+                            alignment = Alignment.BottomCenter
+                        )
+                        Text(
+                            text = onBoardingPage.title,
+                            fontSize = 24.sp,
+                            color = textColor,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = onBoardingPage.description,
+                            fontSize = 20.sp,
+                            color = deskColor,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                } else {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .rotate(-7f)
+                    ) {
+                        Row(modifier = Modifier.padding(start = 20.dp)) {
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.16f)
+                                    .graphicsLayer(
+                                        translationY = -55F
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.mangas_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -95F,
+                                        translationX = 45f
+                                    )
+                                    .fillMaxSize(0.25f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.yournamemanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            // reworked
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 95f
+                                    )
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.16f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.voleyballmanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxSize(0.25f)
+                                    .padding(start = 10.dp)
+                                    .graphicsLayer(
+                                        translationY = -95F,
+                                        translationX = 115f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.toradoramanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                        }
+                        Row(modifier = Modifier.padding(start = 20.dp)) {
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxWidth(0.25f)
+                                    .fillMaxHeight(0.35f)
+                                    .graphicsLayer(
+                                        translationY = -215F,
+                                        translationX = 5f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.dragonmanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 45f
+                                    )
+                                    .fillMaxHeight(0.25f)
+                                    .fillMaxWidth(0.35f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.moonmanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .graphicsLayer(
+                                        translationY = -225F,
+                                        translationX = 95f
+                                    )
+                                    .fillMaxWidth(0.40f)
+                                    .fillMaxHeight(0.35f)
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.catmanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                            // reworked
+                            Card(
+                                shape = RoundedCornerShape(10.dp),
+                                modifier = Modifier
+                                    .fillMaxSize(0.25f)
+                                    .padding(start = 10.dp)
+                                    .graphicsLayer(
+                                        translationY = -55F,
+                                        translationX = 115f
+                                    )
+                                    .weight(1f),
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.tokyoghoulmanga_min),
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    contentScale = ContentScale.Crop,
+                                )
+                            }
+                        }
+                    }
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.onboarding1v1b),
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize(0.2f),
+                            alignment = Alignment.BottomCenter
+                        )
+                        Text(
+                            text = onBoardingPage.title,
+                            fontSize = 24.sp,
+                            color = textColor,
+                            textAlign = TextAlign.Center,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = onBoardingPage.description,
+                            fontSize = 20.sp,
+                            color = deskColor,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }
         }
     }
 }

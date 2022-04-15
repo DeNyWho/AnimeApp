@@ -11,6 +11,15 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization")
 }
 
+tasks {
+    compileKotlin {
+        kotlinOptions.jvmTarget = "11"
+    }
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "11"
+    }
+}
+
 group = "com.example"
 version = "0.0.1"
 application {
