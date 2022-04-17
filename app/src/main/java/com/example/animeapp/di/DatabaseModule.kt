@@ -29,6 +29,12 @@ object DatabaseModule {
         ).build()
     }
 
+    @Provides
+    @Singleton
+    fun provideAnimeDao(
+        animeDataBase: AnimeDataBase
+    ) = animeDataBase.animeDao()
+
 
     @Provides
     @Singleton

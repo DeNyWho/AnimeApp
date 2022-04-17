@@ -27,7 +27,6 @@ import com.example.animeapp.navigation.Screen
 import com.example.animeapp.ui.theme.*
 import com.example.animeapp.util.Constants.ON_BOARDING_PAGE_COUNT
 import com.google.accompanist.pager.*
-import javax.annotation.meta.When
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
@@ -217,7 +216,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.farfor),
+                                    painter = painterResource(id = onBoardingPage.firstImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -235,7 +234,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.tokyoone),
+                                    painter = painterResource(id = onBoardingPage.secondImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -255,7 +254,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.name),
+                                    painter = painterResource(id = onBoardingPage.thirdImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -274,7 +273,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.titans),
+                                    painter = painterResource(id = onBoardingPage.fourthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -295,7 +294,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.voleyball),
+                                    painter = painterResource(id = onBoardingPage.fifthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -314,7 +313,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.toradora),
+                                    painter = painterResource(id =onBoardingPage.sixthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -333,7 +332,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.drstone),
+                                    painter = painterResource(id = onBoardingPage.seventhImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -353,7 +352,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.hero),
+                                    painter = painterResource(id = onBoardingPage.eighthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -405,7 +404,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.farfor),
+                                    painter = painterResource(id = onBoardingPage.firstImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -423,7 +422,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.tokyoone),
+                                    painter = painterResource(id = onBoardingPage.secondImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -443,7 +442,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.name),
+                                    painter = painterResource(id = onBoardingPage.thirdImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -462,7 +461,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.titans),
+                                    painter = painterResource(id = onBoardingPage.fourthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -483,7 +482,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.voleyball),
+                                    painter = painterResource(id = onBoardingPage.fifthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -502,7 +501,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.toradora),
+                                    painter = painterResource(id = onBoardingPage.sixthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -521,7 +520,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.drstone),
+                                    painter = painterResource(id = onBoardingPage.seventhImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -541,7 +540,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.hero),
+                                    painter = painterResource(id = onBoardingPage.eighthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -596,7 +595,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.mangas_min),
+                                    painter = painterResource(id = onBoardingPage.firstImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -614,7 +613,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.catmanga_min),
+                                    painter = painterResource(id = onBoardingPage.secondImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -634,7 +633,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.dragonmanga_min),
+                                    painter = painterResource(id = onBoardingPage.thirdImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -653,7 +652,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.moonmanga_min),
+                                    painter = painterResource(id = onBoardingPage.fourthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -674,7 +673,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.tokyoghoulmanga_min),
+                                    painter = painterResource(id = onBoardingPage.fifthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -693,7 +692,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.toradoramanga_min),
+                                    painter = painterResource(id = onBoardingPage.sixthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -712,7 +711,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.voleyballmanga_min),
+                                    painter = painterResource(id = onBoardingPage.seventhImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -732,7 +731,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.yournamemanga_min),
+                                    painter = painterResource(id = onBoardingPage.eighthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),

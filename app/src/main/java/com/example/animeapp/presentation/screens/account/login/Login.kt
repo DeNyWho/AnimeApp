@@ -1,5 +1,7 @@
-package com.example.animeapp.presentation.screens.login
+package com.example.animeapp.presentation.screens.account.login
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -20,35 +22,38 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.animeapp.R
+import com.example.animeapp.navigation.Screen
+import com.example.animeapp.presentation.screens.account.UserViewModel
 import com.example.animeapp.ui.theme.Gray
 import com.example.animeapp.ui.theme.bluer
 import com.example.animeapp.ui.theme.lighterGray
 import com.example.animeapp.ui.theme.orange
+import com.example.animeapp.util.Result
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-//navController: NavHostController
 @Composable
-fun Login(navController: NavHostController) {
-
-}
-
-@Preview
-@Composable
-fun PreviewLogin() {
+fun Login(
+    navController: NavHostController,
+    userViewModel: UserViewModel = hiltViewModel()
+) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        if(!isSystemInDarkTheme()) {
+        if (!isSystemInDarkTheme()) {
             Image(
                 painter = painterResource(id = R.drawable.backgroundlogin),
                 contentDescription = null,
@@ -154,9 +159,40 @@ fun PreviewLogin() {
                         .padding(start = 25.dp, end = 25.dp, top = 15.dp)
                 )
 
+                val context = LocalContext.current
+
                 Button(
                     onClick = {
-/*TODO{ Here need action on login button }*/
+                        CoroutineScope(Dispatchers.Main).launch {
+                            userViewModel.loginUser(
+                                email = email.text.trim(),
+                                password = password.text.trim()
+                            )
+                            CoroutineScope(Dispatchers.Main).launch {
+                                userViewModel.loginState.collect { result ->
+                                    when (result) {
+                                        is Result.Success -> {
+                                            Toast.makeText(
+                                                context,
+                                                "Account Successfully log in!",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            navController.popBackStack()
+                                            navController.navigate(Screen.Home.route)
+                                        }
+                                        is Result.Error -> {
+                                            Toast.makeText(
+                                                context,
+                                                result.errorMessage,
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            Log.d("ERROR", "${result.errorMessage}")
+                                        }
+                                        else -> {}
+                                    }
+                                }
+                            }
+                        }
                     },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.textButtonColors(
@@ -227,7 +263,7 @@ fun PreviewLogin() {
                             disabledContentColor = Color.Transparent
                         ),
                         onClick = {
-//                            navController.navigate(Screen.SignUp.route)
+                            navController.navigate(Screen.SignUp.route)
                         }
                     ) {
                         Text(text = "Register", color = orange)
@@ -239,3 +275,4 @@ fun PreviewLogin() {
         }
     }
 }
+

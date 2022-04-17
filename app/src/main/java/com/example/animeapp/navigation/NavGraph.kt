@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.animeapp.presentation.screens.account.login.Login
+import com.example.animeapp.presentation.screens.account.signUp.SignUp
 import com.example.animeapp.presentation.screens.home.HomeScreen
-import com.example.animeapp.presentation.screens.login.Login
-import com.example.animeapp.presentation.screens.signUp.SignUp
 import com.example.animeapp.presentation.screens.splash.SplashScreen
 import com.example.animeapp.presentation.screens.welcome.WelcomeScreen
 

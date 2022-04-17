@@ -12,17 +12,34 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-const val API_VERSION = "/v1"
-const val USERS = "$API_VERSION/users"
-const val REGISTER_REQUEST = "$USERS/register"
+const val USERS = "/users"
+const val REGISTER_REQUEST = "$USERS/registration"
 const val LOGIN_REQUEST = "$USERS/login"
+const val USER_REQUEST = "$USERS/userInfo"
 
 fun Route.userRoutes(
     db: Repo,
     jwtService: JwtService,
     hashFunction: (String)->String
 ){
+    get(USER_REQUEST){
+        val email = try {
+            call.request.queryParameters["email"]!!
+        } catch (e: Exception) {
+            call.respond(HttpStatusCode.BadRequest, SimpleResponse(false, "Query Parameter is Not Presented"))
+            return@get
+        }
 
+        try {
+            val user = db.findByUserEmail(email = email)
+            call.respond(HttpStatusCode.OK, user!!)
+        } catch (e: Exception){
+            call.respond(
+                HttpStatusCode.Conflict,
+                SimpleResponse(false,e.message ?: "Some Problem Occurred!")
+            )
+        }
+    }
 
     post(REGISTER_REQUEST) {
         val registerRequest = try {

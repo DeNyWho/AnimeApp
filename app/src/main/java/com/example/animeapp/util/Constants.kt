@@ -2,7 +2,13 @@ package com.example.animeapp.util
 
 object Constants {
 
-    const val BASE_URL = "http://10.0.2.2:8080"
+    const val BASE_URL = "http://192.168.0.43:8080"
+    const val JWT_TOKEN_KEY = "JWT_TOKEN_KEY"
+    const val NAME_KEY = "NAME_KEY"
+    const val EMAIL_KEY = "EMAIL_KEY"
+
+    const val MINIMUM_PASSWORD_LENGTH = 5
+    const val MAXIMUM_PASSWORD_LENGTH = 12
 
     const val DETAILS_ARGUMENT_KEY = "animeId"
 

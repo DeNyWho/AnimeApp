@@ -1,5 +1,6 @@
-package com.example.animeapp.presentation.screens.signUp
+package com.example.animeapp.presentation.screens.account.signUp
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -22,15 +24,24 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.animeapp.navigation.Screen
+import com.example.animeapp.presentation.screens.account.UserViewModel
 import com.example.animeapp.ui.theme.Gray
 import com.example.animeapp.ui.theme.bluer
 import com.example.animeapp.ui.theme.lighterGray
 import com.example.animeapp.ui.theme.orange
+import com.example.animeapp.util.Result
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Composable
-fun SignUp(navController: NavHostController) {
+fun SignUp(
+    navController: NavHostController,
+    userViewModel: UserViewModel = hiltViewModel()
+) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -60,7 +71,7 @@ fun SignUp(navController: NavHostController) {
                     .align(Alignment.CenterHorizontally)
             )
 
-            var name by remember { mutableStateOf(TextFieldValue(""))}
+            var name by remember { mutableStateOf(TextFieldValue("")) }
             TextField(
                 shape = RoundedCornerShape(10.dp),
                 value = name,
@@ -78,11 +89,12 @@ fun SignUp(navController: NavHostController) {
                 singleLine = true,
                 label = { Text("Type your name") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-                leadingIcon = { Icon(
-                    imageVector = Icons.Default.Email,
-                    tint = orange,
-                    contentDescription = "emailIcon"
-                )
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Email,
+                        tint = orange,
+                        contentDescription = "emailIcon"
+                    )
                 },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -108,11 +120,12 @@ fun SignUp(navController: NavHostController) {
                 singleLine = true,
                 label = { Text("Type your email") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                leadingIcon = { Icon(
-                    imageVector = Icons.Default.Email,
-                    tint = orange,
-                    contentDescription = "emailIcon"
-                )
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Email,
+                        tint = orange,
+                        contentDescription = "emailIcon"
+                    )
                 },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -121,7 +134,7 @@ fun SignUp(navController: NavHostController) {
             )
 
             var password by remember { mutableStateOf(TextFieldValue("")) }
-            var passwordVisible by remember{ mutableStateOf(false) }
+            var passwordVisible by remember { mutableStateOf(false) }
             TextField(
                 shape = RoundedCornerShape(10.dp),
                 value = password,
@@ -140,20 +153,21 @@ fun SignUp(navController: NavHostController) {
                 singleLine = true,
                 label = { Text("Type your password") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                leadingIcon = { Icon(
-                    imageVector = Icons.Default.Lock,
-                    tint = orange,
-                    contentDescription = "passwordIcon"
-                )
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Lock,
+                        tint = orange,
+                        contentDescription = "passwordIcon"
+                    )
                 },
                 trailingIcon = {
                     val image = if (passwordVisible)
                         Icons.Filled.Visibility
                     else Icons.Filled.VisibilityOff
 
-                    val description = if(passwordVisible) "Hide password" else "Show password"
+                    val description = if (passwordVisible) "Hide password" else "Show password"
 
-                    IconButton(onClick = { passwordVisible = !passwordVisible}) {
+                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
                         Icon(imageVector = image, contentDescription = description)
                     }
                 },
@@ -164,7 +178,7 @@ fun SignUp(navController: NavHostController) {
             )
 
             var confirmPassword by remember { mutableStateOf(TextFieldValue("")) }
-            var confirmPasswordVisible by remember{ mutableStateOf(false) }
+            var confirmPasswordVisible by remember { mutableStateOf(false) }
             TextField(
                 shape = RoundedCornerShape(10.dp),
                 value = confirmPassword,
@@ -183,20 +197,22 @@ fun SignUp(navController: NavHostController) {
                 singleLine = true,
                 label = { Text("Confirm password") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                leadingIcon = { Icon(
-                    imageVector = Icons.Default.Lock,
-                    tint = orange,
-                    contentDescription = "passwordIcon"
-                )
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Lock,
+                        tint = orange,
+                        contentDescription = "passwordIcon"
+                    )
                 },
                 trailingIcon = {
                     val image = if (confirmPasswordVisible)
                         Icons.Filled.Visibility
                     else Icons.Filled.VisibilityOff
 
-                    val description = if(confirmPasswordVisible) "Hide password" else "Show password"
+                    val description =
+                        if (confirmPasswordVisible) "Hide password" else "Show password"
 
-                    IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible}) {
+                    IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
                         Icon(imageVector = image, contentDescription = description)
                     }
                 },
@@ -205,12 +221,34 @@ fun SignUp(navController: NavHostController) {
                     .fillMaxWidth()
                     .padding(start = 25.dp, end = 25.dp, top = 15.dp)
             )
+            val context = LocalContext.current
 
             Button(
                 onClick = {
-                          if(name.text.isNotEmpty() && password.text.isNotEmpty() && confirmPassword.text.isNotEmpty() && email.text.isNotEmpty()) {
-                              /* Todo{ Auth actions}*/
-                          }
+                    userViewModel.createUser(
+                        name = name.text.trim(),
+                        email = email.text.trim(),
+                        password = password.text.trim(),
+                        confirmPassword = confirmPassword.text.trim()
+                    )
+                    CoroutineScope(Dispatchers.Main).launch {
+                        userViewModel.registrationState.collect { result ->
+                            when (result) {
+                                is Result.Success -> {
+                                    Toast.makeText(context,"Account Successfully Created!", Toast.LENGTH_SHORT).show()
+                                    navController.popBackStack()
+                                    navController.navigate(Screen.Home.route)
+                                }
+                                is Result.Error -> {
+                                    Toast.makeText(context,result.errorMessage, Toast.LENGTH_SHORT).show()
+                                }
+                                is Result.Loading -> {
+
+                                }
+                                else -> {}
+                            }
+                        }
+                    }
                 },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.textButtonColors(
@@ -258,7 +296,6 @@ fun SignUp(navController: NavHostController) {
 //                )
 //                Icon(painter = , contentDescription = )
 //            }
-
             /*Todo{ need reworks }*/
             Row(
                 modifier = Modifier
@@ -267,7 +304,10 @@ fun SignUp(navController: NavHostController) {
                 verticalAlignment = Alignment.Bottom,
                 horizontalArrangement = Arrangement.Center
             ) {
-                Text(text = "I already have an account", modifier = Modifier.padding(bottom = 13.dp))
+                Text(
+                    text = "I already have an account",
+                    modifier = Modifier.padding(bottom = 13.dp)
+                )
                 TextButton(
                     modifier = Modifier
                         .padding(start = 5.dp)
@@ -287,5 +327,4 @@ fun SignUp(navController: NavHostController) {
         }
     }
 }
-
 
