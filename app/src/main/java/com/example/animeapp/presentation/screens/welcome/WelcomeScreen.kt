@@ -195,7 +195,7 @@ fun BodySection(
             .fillMaxSize()
             .background(color)
     ) {
-//        if(pagerState.currentPage == 0) {
+//        need reworked for any android versions ( not worked for android < 9 )
         when(pagerState.currentPage) {
             0 -> {
                 if (!isSystemInDarkTheme()) {
@@ -313,7 +313,7 @@ fun BodySection(
                                     .weight(1f),
                             ) {
                                 Image(
-                                    painter = painterResource(id =onBoardingPage.sixthImage),
+                                    painter = painterResource(id = onBoardingPage.sixthImage),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -575,7 +575,7 @@ fun BodySection(
                         )
                     }
                 }
-        }
+            }
             1 -> {
                 if (!isSystemInDarkTheme()) {
                     Column(

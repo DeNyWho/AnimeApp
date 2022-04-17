@@ -1,5 +1,6 @@
 package com.example.animeapp.presentation.screens.account.signUp
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -42,7 +43,7 @@ fun SignUp(
     navController: NavHostController,
     userViewModel: UserViewModel = hiltViewModel()
 ) {
-    Box(
+    BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
         Column(
@@ -223,44 +224,46 @@ fun SignUp(
             )
             val context = LocalContext.current
 
-            Button(
-                onClick = {
-                    userViewModel.createUser(
-                        name = name.text.trim(),
-                        email = email.text.trim(),
-                        password = password.text.trim(),
-                        confirmPassword = confirmPassword.text.trim()
-                    )
-                    CoroutineScope(Dispatchers.Main).launch {
-                        userViewModel.registrationState.collect { result ->
-                            when (result) {
-                                is Result.Success -> {
-                                    Toast.makeText(context,"Account Successfully Created!", Toast.LENGTH_SHORT).show()
-                                    navController.popBackStack()
-                                    navController.navigate(Screen.Home.route)
-                                }
-                                is Result.Error -> {
-                                    Toast.makeText(context,result.errorMessage, Toast.LENGTH_SHORT).show()
-                                }
-                                is Result.Loading -> {
+            BoxWithConstraints(modifier = Modifier.fillMaxSize().padding(start = 25.dp, end = 25.dp, top = 25.dp)) {
+                Button(
+                    onClick = {
+                        userViewModel.createUser(
+                            name = name.text.trim(),
+                            email = email.text.trim(),
+                            password = password.text.trim(),
+                            confirmPassword = confirmPassword.text.trim()
+                        )
+                        CoroutineScope(Dispatchers.Main).launch {
+                            userViewModel.registrationState.collect { result ->
+                                when (result) {
+                                    is Result.Success -> {
+                                        Toast.makeText(context,"Account Successfully Created!", Toast.LENGTH_SHORT).show()
+                                        navController.popBackStack()
+                                        navController.navigate(Screen.Home.route)
+                                    }
+                                    is Result.Error -> {
+                                        Toast.makeText(context,result.errorMessage, Toast.LENGTH_SHORT).show()
+                                    }
+                                    is Result.Loading -> {
 
+                                    }
+                                    else -> {}
                                 }
-                                else -> {}
                             }
                         }
-                    }
-                },
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.textButtonColors(
-                    backgroundColor = bluer,
-                    contentColor = Color.White
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.2f)
-                    .padding(start = 25.dp, end = 25.dp, top = 25.dp),
-            ) {
-                Text(text = "Join AniBox", fontSize = 20.sp)
+                    },
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.textButtonColors(
+                        backgroundColor = bluer,
+                        contentColor = Color.White
+                    ),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(if (maxHeight < 300.dp) 0.18f else 0.15f),
+                ) {
+                    Text(text = "Join AniBox", fontSize = 20.sp)
+                }
+                Log.d("MAX","$maxHeight")
             }
             /*TODO{ uncomment after adding google auth}*/
 //            Row(modifier = Modifier

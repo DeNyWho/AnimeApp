@@ -50,7 +50,7 @@ fun Login(
     navController: NavHostController,
     userViewModel: UserViewModel = hiltViewModel()
 ) {
-    Box(
+    BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
         if (!isSystemInDarkTheme()) {
@@ -59,13 +59,13 @@ fun Login(
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
-            Column(
+            Column (
                 modifier = Modifier
                     .clip(RoundedCornerShape(40.dp, 40.dp, 0.dp, 0.dp))
                     .background(Color.White)
                     .align(Alignment.BottomEnd)
                     .fillMaxWidth()
-                    .fillMaxHeight(0.7f),
+                    .fillMaxHeight(if(maxHeight < 700.dp) 0.70f else 0.65f),
             ) {
                 Text(
                     text = "Login Account",
@@ -201,7 +201,7 @@ fun Login(
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.25f)
+                        .fillMaxHeight(0.34f)
                         .padding(start = 25.dp, end = 25.dp, top = 25.dp),
                 ) {
                     Text(text = "Login", fontSize = 20.sp)
