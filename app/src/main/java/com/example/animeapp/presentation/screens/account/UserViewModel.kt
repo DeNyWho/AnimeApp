@@ -4,19 +4,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.animeapp.data.remote.models.User
 import com.example.animeapp.data.repository.AnimeRepo
+import com.example.animeapp.domain.use_cases.UseCases
 import com.example.animeapp.util.Constants.MAXIMUM_PASSWORD_LENGTH
 import com.example.animeapp.util.Constants.MINIMUM_PASSWORD_LENGTH
 import com.example.animeapp.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
 class UserViewModel @Inject constructor(
-    private val animeRepo: AnimeRepo
+    private val animeRepo: AnimeRepo,
+    private val useCases: UseCases
 ): ViewModel() {
 
     private val _registrationState = MutableSharedFlow<Result<String>>()
@@ -27,6 +29,22 @@ class UserViewModel @Inject constructor(
 
     private val _currentUserState = MutableSharedFlow<Result<User>>()
     val currentUserState: SharedFlow<Result<User>> = _currentUserState
+
+    private val _onLoginCompleted = MutableStateFlow(false)
+    val onLoginCompleted: StateFlow<Boolean> = _onLoginCompleted
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            _onLoginCompleted.value =
+                useCases.readOnBoardingUseCase().stateIn(viewModelScope).value
+        }
+    }
+
+    fun saveOnLoginState(completed: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            useCases.saveOnBoardingUseCase(completed = completed)
+        }
+    }
 
 
     fun createUser(

@@ -9,8 +9,10 @@ import com.example.animeapp.data.repository.RemoteDataSourceImpl
 import com.example.animeapp.data.repository.Repository
 import com.example.animeapp.domain.repository.DataStoreOperations
 import com.example.animeapp.domain.use_cases.UseCases
-import com.example.animeapp.domain.use_cases.read_onboarding.ReadOnBoardingUseCase
-import com.example.animeapp.domain.use_cases.save_onboarding.SaveOnBoardingUseCase
+import com.example.animeapp.domain.use_cases.login.read_onlogin.ReadOnLoginUseCase
+import com.example.animeapp.domain.use_cases.login.save_onlogin.SaveOnLoginUseCase
+import com.example.animeapp.domain.use_cases.splash.read_onboarding.ReadOnBoardingUseCase
+import com.example.animeapp.domain.use_cases.splash.save_onboarding.SaveOnBoardingUseCase
 import com.example.animeapp.util.SessionManager
 import dagger.Module
 import dagger.Provides
@@ -50,7 +52,9 @@ object RepositoryModule {
     fun provideUseCases(repository: Repository): UseCases {
         return UseCases(
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository = repository),
-            readOnBoardingUseCase = ReadOnBoardingUseCase(repository = repository)
+            readOnBoardingUseCase = ReadOnBoardingUseCase(repository = repository),
+            saveOnLoginUseCase = SaveOnLoginUseCase(repository = repository),
+            readOnLoginUseCase = ReadOnLoginUseCase(repository = repository)
         )
     }
 }

@@ -156,7 +156,7 @@ fun Login(
                     modifier = Modifier
                         .align(CenterHorizontally)
                         .fillMaxWidth()
-                        .padding(start = 25.dp, end = 25.dp, top = 15.dp)
+                        .padding(start = 25.dp, end = 25.dp, top = 15.dp, bottom = 25.dp)
                 )
 
                 val context = LocalContext.current
@@ -177,6 +177,7 @@ fun Login(
                                                 "Account Successfully log in!",
                                                 Toast.LENGTH_SHORT
                                             ).show()
+                                            userViewModel.saveOnLoginState(true)
                                             navController.popBackStack()
                                             navController.navigate(Screen.Home.route)
                                         }
@@ -186,6 +187,7 @@ fun Login(
                                                 result.errorMessage,
                                                 Toast.LENGTH_SHORT
                                             ).show()
+                                            userViewModel.saveOnLoginState(false)
                                             Log.d("ERROR", "${result.errorMessage}")
                                         }
                                         else -> {}
@@ -201,8 +203,8 @@ fun Login(
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(0.34f)
-                        .padding(start = 25.dp, end = 25.dp, top = 25.dp),
+                        .height(50.dp)
+                        .padding(start = 25.dp, end = 25.dp),
                 ) {
                     Text(text = "Login", fontSize = 20.sp)
                 }

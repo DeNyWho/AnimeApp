@@ -1,4 +1,4 @@
-package com.example.animeapp.domain.use_cases.save_onboarding
+package com.example.animeapp.domain.use_cases.splash.save_onboarding
 
 import com.example.animeapp.data.repository.Repository
 

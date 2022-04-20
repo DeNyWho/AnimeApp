@@ -259,7 +259,7 @@ fun SignUp(
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(if (maxHeight < 300.dp) 0.18f else 0.15f),
+                        .height(50.dp),
                 ) {
                     Text(text = "Join AniBox", fontSize = 20.sp)
                 }
