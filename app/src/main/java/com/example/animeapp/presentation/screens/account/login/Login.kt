@@ -50,6 +50,8 @@ fun Login(
     navController: NavHostController,
     userViewModel: UserViewModel = hiltViewModel()
 ) {
+    val scope = rememberCoroutineScope()
+
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -65,7 +67,7 @@ fun Login(
                     .background(Color.White)
                     .align(Alignment.BottomEnd)
                     .fillMaxWidth()
-                    .fillMaxHeight(if(maxHeight < 700.dp) 0.70f else 0.65f),
+                    .fillMaxHeight(if (maxHeight < 700.dp) 0.70f else 0.65f),
             ) {
                 Text(
                     text = "Login Account",
@@ -163,35 +165,33 @@ fun Login(
 
                 Button(
                     onClick = {
-                        CoroutineScope(Dispatchers.Main).launch {
                             userViewModel.loginUser(
                                 email = email.text.trim(),
                                 password = password.text.trim()
                             )
-                            CoroutineScope(Dispatchers.Main).launch {
-                                userViewModel.loginState.collect { result ->
-                                    when (result) {
-                                        is Result.Success -> {
-                                            Toast.makeText(
-                                                context,
-                                                "Account Successfully log in!",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                            userViewModel.saveOnLoginState(true)
-                                            navController.popBackStack()
-                                            navController.navigate(Screen.Home.route)
-                                        }
-                                        is Result.Error -> {
-                                            Toast.makeText(
-                                                context,
-                                                result.errorMessage,
-                                                Toast.LENGTH_SHORT
-                                            ).show()
-                                            userViewModel.saveOnLoginState(false)
-                                            Log.d("ERROR", "${result.errorMessage}")
-                                        }
-                                        else -> {}
+                        scope.launch {
+                            userViewModel.loginState.collect { result ->
+                                when (result) {
+                                    is Result.Success -> {
+                                        Toast.makeText(
+                                            context,
+                                            "Account Successfully log in!",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        userViewModel.saveOnLoginState(true)
+                                        navController.popBackStack()
+                                        navController.navigate(Screen.Home.route)
                                     }
+                                    is Result.Error -> {
+                                        Toast.makeText(
+                                            context,
+                                            result.errorMessage,
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        userViewModel.saveOnLoginState(false)
+                                        Log.d("ERROR", "${result.errorMessage}")
+                                    }
+                                    else -> {}
                                 }
                             }
                         }

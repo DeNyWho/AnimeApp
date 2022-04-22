@@ -43,6 +43,7 @@ fun SignUp(
     navController: NavHostController,
     userViewModel: UserViewModel = hiltViewModel()
 ) {
+    val scope = rememberCoroutineScope()
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -51,8 +52,7 @@ fun SignUp(
                 .clip(RoundedCornerShape(40.dp, 40.dp, 0.dp, 0.dp))
                 .background(Color.White)
                 .align(Alignment.BottomEnd)
-                .fillMaxWidth()
-                .fillMaxHeight(),
+                .fillMaxSize(),
         ) {
             Text(
                 text = "Create an Account",
@@ -223,49 +223,52 @@ fun SignUp(
                     .padding(start = 25.dp, end = 25.dp, top = 15.dp)
             )
             val context = LocalContext.current
-
-            BoxWithConstraints(modifier = Modifier.fillMaxSize().padding(start = 25.dp, end = 25.dp, top = 25.dp)) {
-                Button(
-                    onClick = {
-                        userViewModel.createUser(
-                            name = name.text.trim(),
-                            email = email.text.trim(),
-                            password = password.text.trim(),
-                            confirmPassword = confirmPassword.text.trim()
-                        )
-                        CoroutineScope(Dispatchers.Main).launch {
-                            userViewModel.registrationState.collect { result ->
-                                when (result) {
-                                    is Result.Success -> {
-                                        Toast.makeText(context,"Account Successfully Created!", Toast.LENGTH_SHORT).show()
-                                        navController.popBackStack()
-                                        navController.navigate(Screen.Home.route)
-                                    }
-                                    is Result.Error -> {
-                                        Toast.makeText(context,result.errorMessage, Toast.LENGTH_SHORT).show()
-                                    }
-                                    is Result.Loading -> {
-
-                                    }
-                                    else -> {}
+            Button(
+                onClick = {
+                    userViewModel.createUser(
+                        name = name.text.trim(),
+                        email = email.text.trim(),
+                        password = password.text.trim(),
+                        confirmPassword = confirmPassword.text.trim()
+                    )
+                    scope.launch {
+                        userViewModel.registrationState.collect { result ->
+                            when (result) {
+                                is Result.Success -> {
+                                    Toast.makeText(
+                                        context,
+                                        "Account Successfully Created!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    userViewModel.saveOnLoginState(true)
+                                    navController.popBackStack()
+                                    navController.navigate(Screen.Home.route)
                                 }
+                                is Result.Error -> {
+                                    userViewModel.saveOnLoginState(false)
+                                    Toast.makeText(context, result.errorMessage, Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                                is Result.Loading -> {}
+                                else -> {}
                             }
                         }
-                    },
-                    shape = RoundedCornerShape(10.dp),
-                    colors = ButtonDefaults.textButtonColors(
-                        backgroundColor = bluer,
-                        contentColor = Color.White
-                    ),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp),
-                ) {
-                    Text(text = "Join AniBox", fontSize = 20.sp)
-                }
-                Log.d("MAX","$maxHeight")
+                    }
+                },
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.textButtonColors(
+                    backgroundColor = bluer,
+                    contentColor = Color.White
+                ),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 25.dp, end = 25.dp, top = 25.dp)
+                    .height(50.dp),
+            ) {
+                Text(text = "Join AniBox", fontSize = 20.sp)
             }
-            /*TODO{ uncomment after adding google auth}*/
+        }
+        /*TODO{ uncomment after adding google auth}*/
 //            Row(modifier = Modifier
 //                .fillMaxHeight(0.2f)
 //                .padding(top = 20.dp, start = 25.dp, end = 25.dp)) {
@@ -299,33 +302,32 @@ fun SignUp(
 //                )
 //                Icon(painter = , contentDescription = )
 //            }
-            /*Todo{ need reworks }*/
-            Row(
+        /*Todo{ need reworks }*/
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 25.dp, end = 25.dp),
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "I already have an account",
+                modifier = Modifier.padding(bottom = 13.dp)
+            )
+            TextButton(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(start = 25.dp, end = 25.dp, top = 25.dp),
-                verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "I already have an account",
-                    modifier = Modifier.padding(bottom = 13.dp)
-                )
-                TextButton(
-                    modifier = Modifier
-                        .padding(start = 5.dp)
-                        .align(Alignment.Bottom),
-                    colors = ButtonDefaults.textButtonColors(
-                        contentColor = Color.Transparent,
-                        backgroundColor = Color.Transparent,
-                        disabledContentColor = Color.Transparent
-                    ),
-                    onClick = {
-                        navController.navigate(Screen.Login.route)
-                    }
-                ) {
-                    Text(text = "Sign In", color = orange)
+                    .padding(start = 5.dp)
+                    .align(Alignment.Bottom),
+                colors = ButtonDefaults.textButtonColors(
+                    contentColor = Color.Transparent,
+                    backgroundColor = Color.Transparent,
+                    disabledContentColor = Color.Transparent
+                ),
+                onClick = {
+                    navController.navigate(Screen.Login.route)
                 }
+            ) {
+                Text(text = "Sign In", color = orange)
             }
         }
     }

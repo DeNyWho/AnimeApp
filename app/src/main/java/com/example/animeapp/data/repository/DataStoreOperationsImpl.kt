@@ -20,6 +20,7 @@ class DataStoreOperationsImpl (context: Context): DataStoreOperations {
 
     private object PreferencesKey {
         val onBoardingKey = booleanPreferencesKey(name = PREFERENCES_NAME)
+        val onLoginKey = booleanPreferencesKey(name = PREFERENCES_NAME)
     }
 
     private val dataStore = context.datastore
@@ -43,6 +44,27 @@ class DataStoreOperationsImpl (context: Context): DataStoreOperations {
             .map { preferences ->
                 val onBoardingState = preferences[PreferencesKey.onBoardingKey] ?: false
                 onBoardingState
+            }
+    }
+
+    override suspend fun saveLoginState(completed: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[PreferencesKey.onLoginKey] = completed
+        }
+    }
+
+    override fun readOnLoginState(): Flow<Boolean> {
+        return dataStore.data
+            .catch { exception ->
+                if (exception is IOException) {
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }
+            .map { preferences ->
+                val onLoginState = preferences[PreferencesKey.onLoginKey] ?: false
+                onLoginState
             }
     }
 }
