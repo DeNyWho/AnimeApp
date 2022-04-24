@@ -34,6 +34,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.animeapp.R
+import com.example.animeapp.data.remote.models.user.User
+import com.example.animeapp.data.remote.models.user.UserDto
 import com.example.animeapp.navigation.Screen
 import com.example.animeapp.presentation.screens.account.UserViewModel
 import com.example.animeapp.ui.theme.Gray
@@ -165,36 +167,13 @@ fun Login(
 
                 Button(
                     onClick = {
-                            userViewModel.loginUser(
-                                email = email.text.trim(),
-                                password = password.text.trim()
-                            )
-                        scope.launch {
-                            userViewModel.loginState.collect { result ->
-                                when (result) {
-                                    is Result.Success -> {
-                                        Toast.makeText(
-                                            context,
-                                            "Account Successfully log in!",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        userViewModel.saveOnLoginState(true)
-                                        navController.popBackStack()
-                                        navController.navigate(Screen.Home.route)
-                                    }
-                                    is Result.Error -> {
-                                        Toast.makeText(
-                                            context,
-                                            result.errorMessage,
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        userViewModel.saveOnLoginState(false)
-                                        Log.d("ERROR", "${result.errorMessage}")
-                                    }
-                                    else -> {}
-                                }
-                            }
-                        }
+                        val user = UserDto(
+                            email = email.text,
+                            password = password.text,
+                            name = ""
+                        )
+                              userViewModel.getUserLogin(user)
+                        navController.navigate(Screen.Home.route)
                     },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.textButtonColors(

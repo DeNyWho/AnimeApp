@@ -1,7 +1,6 @@
 package com.example.animeapp.presentation.screens.account.signUp
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,23 +26,27 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.animeapp.data.remote.models.user.UserDto
 import com.example.animeapp.navigation.Screen
 import com.example.animeapp.presentation.screens.account.UserViewModel
 import com.example.animeapp.ui.theme.Gray
 import com.example.animeapp.ui.theme.bluer
 import com.example.animeapp.ui.theme.lighterGray
 import com.example.animeapp.ui.theme.orange
-import com.example.animeapp.util.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.channels.Channel
 
 @Composable
 fun SignUp(
     navController: NavHostController,
     userViewModel: UserViewModel = hiltViewModel()
 ) {
-    val scope = rememberCoroutineScope()
+    val signState = userViewModel.signState.value
+    val snackbarChannel = remember { Channel<String?>(Channel.CONFLATED) }
+
+
+
+
+
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -225,35 +228,22 @@ fun SignUp(
             val context = LocalContext.current
             Button(
                 onClick = {
-                    userViewModel.createUser(
-                        name = name.text.trim(),
-                        email = email.text.trim(),
-                        password = password.text.trim(),
-                        confirmPassword = confirmPassword.text.trim()
+                    val user = UserDto(
+                        email = email.text,
+                        password = password.text,
+                        name = name.text
                     )
-                    scope.launch {
-                        userViewModel.registrationState.collect { result ->
-                            when (result) {
-                                is Result.Success -> {
-                                    Toast.makeText(
-                                        context,
-                                        "Account Successfully Created!",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    userViewModel.saveOnLoginState(true)
-                                    navController.popBackStack()
-                                    navController.navigate(Screen.Home.route)
-                                }
-                                is Result.Error -> {
-                                    userViewModel.saveOnLoginState(false)
-                                    Toast.makeText(context, result.errorMessage, Toast.LENGTH_SHORT)
-                                        .show()
-                                }
-                                is Result.Loading -> {}
-                                else -> {}
-                            }
-                        }
+                    userViewModel.getUserSignUp(user)
+
+                    with(signState.error.getContentIfNotHandled()){
+                        snackbarChannel.trySend(this)
                     }
+                    if(signState.result) {
+                        navController.navigate(Screen.Home.route)
+                    }
+                    Log.d("USER", "${signState.data}")
+                    Log.d("USERERR", "${signState.error}")
+                    Log.d("USERLOAD", "${signState.isLoading}")
                 },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.textButtonColors(

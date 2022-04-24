@@ -1,11 +1,7 @@
 package com.example.animeapp.di
 
 import android.content.Context
-import com.example.animeapp.data.local.dao.AnimeDao
-import com.example.animeapp.data.remote.api.AnimeApi
-import com.example.animeapp.data.repository.AnimeRepo
 import com.example.animeapp.data.repository.DataStoreOperationsImpl
-import com.example.animeapp.data.repository.RemoteDataSourceImpl
 import com.example.animeapp.data.repository.Repository
 import com.example.animeapp.domain.repository.DataStoreOperations
 import com.example.animeapp.domain.use_cases.UseCases
@@ -13,7 +9,6 @@ import com.example.animeapp.domain.use_cases.login.read_onlogin.ReadOnLoginUseCa
 import com.example.animeapp.domain.use_cases.login.save_onlogin.SaveOnLoginUseCase
 import com.example.animeapp.domain.use_cases.splash.read_onboarding.ReadOnBoardingUseCase
 import com.example.animeapp.domain.use_cases.splash.save_onboarding.SaveOnBoardingUseCase
-import com.example.animeapp.util.SessionManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,19 +28,19 @@ object RepositoryModule {
         return DataStoreOperationsImpl(context = context)
     }
 
-    @Provides
-    @Singleton
-    fun provideAnimeRepo(
-        animeApi: AnimeApi,
-        animeDao: AnimeDao,
-        sessionManager: SessionManager
-    ): AnimeRepo {
-        return RemoteDataSourceImpl(
-            animeAPI = animeApi,
-            animeDao = animeDao,
-            sessionManager = sessionManager
-        )
-    }
+//    @Provides
+//    @Singleton
+//    fun provideAnimeRepo(
+//        animeApi: AnimeApi,
+//        animeDao: AnimeDao,
+//        sessionManager: SessionManager
+//    ): AnimeRepo {
+//        return RemoteDataSourceImpl(
+//            animeAPI = animeApi,
+//            animeDao = animeDao,
+//            sessionManager = sessionManager
+//        )
+//    }
 
     @Provides
     @Singleton

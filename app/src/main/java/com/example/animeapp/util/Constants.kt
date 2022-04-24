@@ -14,7 +14,6 @@ object Constants {
 
     const val ANIME_DATABASE = "anime_database"
     const val ANIME_DATABASE_TABLE = "anime_table"
-    const val HERO_REMOTE_KEYS_DATABASE_TABLE = "anime_remote_keys_table"
 
     const val PREFERENCES_NAME = "anime_preferences"
     const val PREFERENCES_KEY = "on_boarding_completed"
