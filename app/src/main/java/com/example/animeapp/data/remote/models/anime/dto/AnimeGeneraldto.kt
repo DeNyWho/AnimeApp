@@ -1,5 +1,6 @@
-package com.example.animeapp.data.remote.models.anime
+package com.example.animeapp.data.remote.models.anime.dto
 
+import com.example.animeapp.data.remote.models.anime.*
 import com.example.animeapp.data.remote.models.common.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

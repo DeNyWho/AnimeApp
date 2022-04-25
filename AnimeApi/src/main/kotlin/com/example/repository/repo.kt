@@ -13,8 +13,8 @@ class Repo {
         dbQuery{
             UserTable.insert { ut ->
                 ut[email] = user.email
-                ut[hashPassword] = user.hashPassword
-                ut[name] = user.userName
+                ut[hashPassword] = user.password
+                ut[name] = user.name
             }
         }
     }
@@ -32,8 +32,8 @@ class Repo {
 
         return User(
             email =  row[UserTable.email],
-            hashPassword = row[UserTable.hashPassword],
-            userName = row[UserTable.name]
+            password = row[UserTable.hashPassword],
+            name = row[UserTable.name]
         )
     }
 

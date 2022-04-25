@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class User(
     val email: String,
-    val hashPassword: String,
-    val userName: String
+    val password: String,
+    val name: String
 ): Principal

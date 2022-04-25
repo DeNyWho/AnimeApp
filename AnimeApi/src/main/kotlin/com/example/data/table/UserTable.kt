@@ -7,7 +7,7 @@ object UserTable: Table() {
 
     val email: Column<String> = varchar("email", 512)
     val name: Column<String> = varchar("name", 512)
-    val hashPassword: Column<String> = varchar("hashPassword", 512)
+    val hashPassword: Column<String> = varchar("password", 512)
 
     override val primaryKey: Table.PrimaryKey = PrimaryKey(email)
 

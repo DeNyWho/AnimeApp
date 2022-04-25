@@ -1,6 +1,5 @@
 package com.example.animeapp.domain.use_cases.topAnime
 
-import android.view.KeyEvent
 import com.example.animeapp.core.DispatchersProvider
 import com.example.animeapp.core.wrapper.Event
 import com.example.animeapp.core.wrapper.Resource
@@ -10,6 +9,7 @@ import com.example.animeapp.presentation.screens.home.data.AnimeTopState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import timber.log.Timber
 import javax.inject.Inject
 
 class GetAnimeTopUseCase @Inject constructor(

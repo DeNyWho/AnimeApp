@@ -4,6 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SimpleResponse(
-    val success: Boolean,
-    val massage: String
+    val message: String
 )

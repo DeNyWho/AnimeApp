@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class UserResponse(
-    @SerialName("message")
-    val message: String? = null,
+data class UserSignResponse(
+    @SerialName("data")
+    val data: UserDto? = null,
 )

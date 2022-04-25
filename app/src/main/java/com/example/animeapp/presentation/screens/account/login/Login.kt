@@ -1,7 +1,5 @@
 package com.example.animeapp.presentation.screens.account.login
 
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -34,18 +32,17 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.animeapp.R
-import com.example.animeapp.data.remote.models.user.User
 import com.example.animeapp.data.remote.models.user.UserDto
+import com.example.animeapp.data.remote.models.user.UserLoginDto
 import com.example.animeapp.navigation.Screen
 import com.example.animeapp.presentation.screens.account.UserViewModel
 import com.example.animeapp.ui.theme.Gray
 import com.example.animeapp.ui.theme.bluer
 import com.example.animeapp.ui.theme.lighterGray
 import com.example.animeapp.ui.theme.orange
-import com.example.animeapp.util.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
+import timber.log.Timber
 
 @Composable
 fun Login(
@@ -53,6 +50,11 @@ fun Login(
     userViewModel: UserViewModel = hiltViewModel()
 ) {
     val scope = rememberCoroutineScope()
+    val snackbarChannel = remember { Channel<String?>(Channel.CONFLATED) }
+
+
+
+
 
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
@@ -167,13 +169,16 @@ fun Login(
 
                 Button(
                     onClick = {
-                        val user = UserDto(
+                        val user = UserLoginDto(
                             email = email.text,
-                            password = password.text,
-                            name = ""
+                            password = password.text
                         )
-                              userViewModel.getUserLogin(user)
-                        navController.navigate(Screen.Home.route)
+                        userViewModel.getUserLogin(user)
+                        val loginState = userViewModel.loginState.value
+                        Timber.d(loginState.result.toString())
+                        if(loginState.result) {
+                            navController.navigate(Screen.Home.route)
+                        }
                     },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.textButtonColors(
@@ -256,4 +261,5 @@ fun Login(
         }
     }
 }
+
 

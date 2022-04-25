@@ -12,7 +12,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import timber.log.Timber
 
-class SafeCall {
+class UserSafeCall {
     suspend inline operator fun <reified T: Any, reified U: Any> invoke(
         client: HttpClient,
         request: HttpRequestBuilder

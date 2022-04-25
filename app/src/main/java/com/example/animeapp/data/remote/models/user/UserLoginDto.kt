@@ -4,19 +4,16 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class UserDto(
+data class UserLoginDto(
     @SerialName("email")
     val email: String = "",
-    @SerialName("name")
-    val name: String = "",
     @SerialName("password")
     val password: String = ""
 )
 
-fun UserDto.toUser(): User {
-    return User(
+fun UserLoginDto.toLogin(): UserLogin {
+    return UserLogin(
         email = email,
-        password = password,
-        name = name
+        password = password
     )
 }

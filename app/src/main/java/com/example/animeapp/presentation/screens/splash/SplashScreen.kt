@@ -24,13 +24,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.animeapp.R
 import com.example.animeapp.navigation.Screen
+import com.example.animeapp.presentation.screens.account.UserViewModel
 import com.example.animeapp.ui.theme.Purple500
 import com.example.animeapp.ui.theme.Purple700
 
 @Composable
 fun SplashScreen(
     navController: NavController,
-    splashViewModel: SplashViewModel = hiltViewModel()
+    splashViewModel: SplashViewModel = hiltViewModel(),
 ) {
 
     val onBoardingCompleted by splashViewModel.onBoardingCompleted.collectAsState()
@@ -80,7 +81,7 @@ fun Splash(degrees: Float) {
         Spacer(modifier = Modifier.height(120.dp))
         Row(
             modifier = Modifier
-                .offset(x=0.dp, y=90.dp)
+                .offset(x = 0.dp, y = 90.dp)
                 .align(Alignment.Center)
         ) {
             Text(

@@ -45,8 +45,6 @@ fun SignUp(
 
 
 
-
-
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -241,9 +239,6 @@ fun SignUp(
                     if(signState.result) {
                         navController.navigate(Screen.Home.route)
                     }
-                    Log.d("USER", "${signState.data}")
-                    Log.d("USERERR", "${signState.error}")
-                    Log.d("USERLOAD", "${signState.isLoading}")
                 },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.textButtonColors(

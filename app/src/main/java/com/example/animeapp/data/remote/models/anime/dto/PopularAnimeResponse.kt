@@ -1,6 +1,5 @@
 package com.example.animeapp.data.remote.models.anime.dto
 
-import com.example.animeapp.data.remote.models.anime.AnimeGeneralDto
 import com.example.animeapp.data.remote.models.anime.Pagination
 import com.example.animeapp.domain.model.anime.AnimeAiringPopular
 import kotlinx.serialization.SerialName

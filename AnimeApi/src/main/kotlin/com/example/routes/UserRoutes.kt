@@ -26,7 +26,7 @@ fun Route.userRoutes(
         val email = try {
             call.request.queryParameters["email"]!!
         } catch (e: Exception) {
-            call.respond(HttpStatusCode.BadRequest, SimpleResponse(false, "Query Parameter is Not Presented"))
+            call.respond(HttpStatusCode.BadRequest, SimpleResponse("Query Parameter is Not Presented"))
             return@get
         }
 
@@ -36,7 +36,7 @@ fun Route.userRoutes(
         } catch (e: Exception){
             call.respond(
                 HttpStatusCode.Conflict,
-                SimpleResponse(false,e.message ?: "Some Problem Occurred!")
+                SimpleResponse(e.message ?: "Some Problem Occurred!")
             )
         }
     }
@@ -45,18 +45,18 @@ fun Route.userRoutes(
         val registerRequest = try {
             call.receive<RegisterRequest>()
         } catch (e: Exception){
-            call.respond(HttpStatusCode.BadRequest, SimpleResponse(false,"Missing Some Fields"))
+            call.respond(HttpStatusCode.BadRequest, SimpleResponse("Missing Some Fields"))
             return@post
         }
 
         try {
             val user = User(registerRequest.email,hashFunction(registerRequest.password),registerRequest.name)
             db.addUser(user)
-            call.respond(HttpStatusCode.OK, SimpleResponse(true,jwtService.generateToken(user)))
+            call.respond(HttpStatusCode.OK, SimpleResponse(jwtService.generateToken(user)))
         }catch (e: Exception){
             call.respond(
                 HttpStatusCode.Conflict,
-                SimpleResponse(false,e.message ?: "Some Problem Occurred!")
+                SimpleResponse(e.message ?: "Some Problem Occurred!")
             )
         }
     }
@@ -65,7 +65,7 @@ fun Route.userRoutes(
         val loginRequest = try {
             call.receive<LoginRequest>()
         } catch (e: Exception){
-            call.respond(HttpStatusCode.BadRequest, SimpleResponse(false,"Missing Some Fields"))
+            call.respond(HttpStatusCode.BadRequest, SimpleResponse("Missing Some Fields"))
             return@post
         }
 
@@ -73,25 +73,25 @@ fun Route.userRoutes(
             val user = db.findByUserEmail(loginRequest.email)
 
             if(user == null){
-                call.respond(HttpStatusCode.BadRequest, SimpleResponse(false,"Wrong Email Id"))
+                call.respond(HttpStatusCode.BadRequest, SimpleResponse("Wrong Email Id"))
             } else {
 
-                if(user.hashPassword == hashFunction(loginRequest.password)){
+                if(user.password == hashFunction(loginRequest.password)){
                     call.respond(
                         HttpStatusCode.OK,
-                        SimpleResponse(true,jwtService.generateToken(user))
+                        SimpleResponse(jwtService.generateToken(user))
                     )
                 } else{
                     call.respond(
                         HttpStatusCode.BadRequest,
-                        SimpleResponse(false,"Password Incorrect!")
+                        SimpleResponse("Password Incorrect!")
                     )
                 }
             }
         } catch (e: Exception){
             call.respond(
                 HttpStatusCode.Conflict,
-                SimpleResponse(false,e.message ?: "Some Problem Occurred!")
+                SimpleResponse(e.message ?: "Some Problem Occurred!")
             )
         }
     }
