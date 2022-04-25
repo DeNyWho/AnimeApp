@@ -36,12 +36,14 @@ import com.example.animeapp.data.remote.models.user.UserDto
 import com.example.animeapp.data.remote.models.user.UserLoginDto
 import com.example.animeapp.navigation.Screen
 import com.example.animeapp.presentation.screens.account.UserViewModel
+import com.example.animeapp.presentation.screens.account.state.UserState
 import com.example.animeapp.ui.theme.Gray
 import com.example.animeapp.ui.theme.bluer
 import com.example.animeapp.ui.theme.lighterGray
 import com.example.animeapp.ui.theme.orange
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @Composable
@@ -49,12 +51,15 @@ fun Login(
     navController: NavHostController,
     userViewModel: UserViewModel = hiltViewModel()
 ) {
-    val scope = rememberCoroutineScope()
-    val snackbarChannel = remember { Channel<String?>(Channel.CONFLATED) }
+    LaunchedEffect(Unit) {
+        userViewModel.loginState.collectLatest {
+            if (it.result) {
+                navController.popBackStack()
+                navController.navigate(Screen.Home.route)
+            }
 
-
-
-
+        }
+    }
 
     BoxWithConstraints(
         modifier = Modifier.fillMaxSize()
@@ -65,7 +70,7 @@ fun Login(
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
-            Column (
+            Column(
                 modifier = Modifier
                     .clip(RoundedCornerShape(40.dp, 40.dp, 0.dp, 0.dp))
                     .background(Color.White)
@@ -174,11 +179,6 @@ fun Login(
                             password = password.text
                         )
                         userViewModel.getUserLogin(user)
-                        val loginState = userViewModel.loginState.value
-                        Timber.d(loginState.result.toString())
-                        if(loginState.result) {
-                            navController.navigate(Screen.Home.route)
-                        }
                     },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.textButtonColors(
@@ -261,5 +261,6 @@ fun Login(
         }
     }
 }
+
 
 

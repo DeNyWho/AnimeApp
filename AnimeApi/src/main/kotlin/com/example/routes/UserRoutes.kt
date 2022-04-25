@@ -52,7 +52,7 @@ fun Route.userRoutes(
         try {
             val user = User(registerRequest.email,hashFunction(registerRequest.password),registerRequest.name)
             db.addUser(user)
-            call.respond(HttpStatusCode.OK, SimpleResponse(jwtService.generateToken(user)))
+            call.respond(HttpStatusCode.OK, jwtService.generateToken(user))
         }catch (e: Exception){
             call.respond(
                 HttpStatusCode.Conflict,

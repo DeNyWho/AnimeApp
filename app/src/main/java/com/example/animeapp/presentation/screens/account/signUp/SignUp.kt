@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -33,15 +32,24 @@ import com.example.animeapp.ui.theme.Gray
 import com.example.animeapp.ui.theme.bluer
 import com.example.animeapp.ui.theme.lighterGray
 import com.example.animeapp.ui.theme.orange
-import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collectLatest
+import timber.log.Timber
 
 @Composable
 fun SignUp(
     navController: NavHostController,
     userViewModel: UserViewModel = hiltViewModel()
 ) {
-    val signState = userViewModel.signState.value
-    val snackbarChannel = remember { Channel<String?>(Channel.CONFLATED) }
+    LaunchedEffect(Unit) {
+        userViewModel.signState.collectLatest {
+            if (it.result) {
+                navController.popBackStack()
+                navController.navigate(Screen.Home.route)
+            }
+            Timber.d(it.result.toString())
+            Log.d("TAG","${it.result}")
+        }
+    }
 
 
 
@@ -223,7 +231,6 @@ fun SignUp(
                     .fillMaxWidth()
                     .padding(start = 25.dp, end = 25.dp, top = 15.dp)
             )
-            val context = LocalContext.current
             Button(
                 onClick = {
                     val user = UserDto(
@@ -232,13 +239,6 @@ fun SignUp(
                         name = name.text
                     )
                     userViewModel.getUserSignUp(user)
-
-                    with(signState.error.getContentIfNotHandled()){
-                        snackbarChannel.trySend(this)
-                    }
-                    if(signState.result) {
-                        navController.navigate(Screen.Home.route)
-                    }
                 },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.textButtonColors(
