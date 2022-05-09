@@ -97,7 +97,7 @@ fun WelcomeScreen(
                 Button(
                     onClick = {
                         welcomeScreenViewModel.saveOnBoardingState(true)
-                        navController.navigate(Screen.SignUp.route)
+                        navController.navigate(Screen.Login.route)
                     },
                     Modifier
                         .fillMaxHeight()
@@ -146,7 +146,7 @@ fun WelcomeScreen(
                 Button(
                     onClick = {
                         welcomeScreenViewModel.saveOnBoardingState(true)
-                        navController.navigate(Screen.SignUp.route)
+                        navController.navigate(Screen.Login.route)
                     },
                     Modifier
                         .fillMaxHeight()

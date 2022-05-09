@@ -6,6 +6,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -13,6 +15,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.anibox.core.DispatchersProvider
+import com.example.anibox.navigation.BottomNavTabs
+import com.example.anibox.navigation.NavScreen
 import com.example.anibox.navigation.Screen
 import com.example.anibox.presenter.account.UserViewModel
 import com.example.anibox.presenter.account.login.Login
@@ -53,12 +57,15 @@ class MainActivity : ComponentActivity() {
 }
 
 
+
 @Composable
 fun MyApp(window: Window, dispatchers: DispatchersProvider) {
 
     val systemUiController = rememberSystemUiController()
     val navController = rememberNavController()
     val homeScrollState = rememberLazyListState()
+    val selectedTab = remember { mutableStateOf(BottomNavTabs.Home) }
+
 
     NavHost(navController = navController, startDestination = Screen.Splash.route) {
         composable(Screen.Home.route) {
@@ -78,6 +85,7 @@ fun MyApp(window: Window, dispatchers: DispatchersProvider) {
                 lazyColumnState = homeScrollState,
                 onSearchFieldClick = {}
             )
+            NavScreen(selectedTab = selectedTab, navController = navController)
         }
 
         composable(Screen.Login.route) {
@@ -151,3 +159,5 @@ fun MyApp(window: Window, dispatchers: DispatchersProvider) {
 
 
 }
+
+

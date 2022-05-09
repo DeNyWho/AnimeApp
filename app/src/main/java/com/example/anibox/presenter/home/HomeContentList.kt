@@ -63,8 +63,9 @@ fun HomeContentList(
         shimmerInstance = shimmerInstance,
 //        onItemClick = onTopAnimeClick
       )
-
     }
+
+
     item(key = "winter") {
       Row(
         modifier = Modifier.padding(start = 18.dp, end = 18.dp, bottom = 4.dp),
@@ -105,46 +106,6 @@ fun HomeContentList(
         }
       }
     }
-    item(key = "summer") {
-      Row(
-        modifier = Modifier.padding(start = 18.dp, end = 18.dp, bottom = 4.dp),
-        verticalAlignment = Alignment.CenterVertically
-      ) {
-        Text(
-          modifier = Modifier.weight(1f),
-          text = "Season Summer",
-          style = TextStyle(
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp
-          )
-        )
-      }
-
-      val shimmerInstance = rememberShimmer(shimmerBounds = ShimmerBounds.Custom)
-
-      LazyRow(
-        contentPadding = PaddingValues(12.dp, 0.dp, 12.dp, 0.dp),
-        modifier = Modifier.onGloballyPositioned { layoutCoordinates ->
-          val position = layoutCoordinates.unclippedBoundsInWindow()
-          shimmerInstance.updateBounds(position)
-        }
-      ) {
-        if (animeSeasonSummer.isLoading) {
-          showShimmerPlaceholder(shimmerInstance)
-        } else {
-          items(animeSeasonSummer.data, key = { item -> item.malId }) { anime ->
-            ItemAnimeSeason(
-              modifier = Modifier
-                .width(160.dp)
-                .padding(12.dp, 0.dp),
-              anime = anime,
-              onItemClick = { onTopAnimeClick(ContentType.Anime.name, anime.malId) }
-            )
-          }
-        }
-      }
-    }
     item(key = "spring") {
       Row(
         modifier = Modifier.padding(start = 18.dp, end = 18.dp, bottom = 4.dp),
@@ -174,6 +135,46 @@ fun HomeContentList(
           showShimmerPlaceholder(shimmerInstance)
         } else {
           items(animeSeasonSpring.data, key = { item -> item.malId }) { anime ->
+            ItemAnimeSeason(
+              modifier = Modifier
+                .width(160.dp)
+                .padding(12.dp, 0.dp),
+              anime = anime,
+              onItemClick = { onTopAnimeClick(ContentType.Anime.name, anime.malId) }
+            )
+          }
+        }
+      }
+    }
+    item(key = "summer") {
+      Row(
+        modifier = Modifier.padding(start = 18.dp, end = 18.dp, bottom = 4.dp),
+        verticalAlignment = Alignment.CenterVertically
+      ) {
+        Text(
+          modifier = Modifier.weight(1f),
+          text = "Season Summer",
+          style = TextStyle(
+            color = Color.White,
+            fontWeight = FontWeight.Bold,
+            fontSize = 18.sp
+          )
+        )
+      }
+
+      val shimmerInstance = rememberShimmer(shimmerBounds = ShimmerBounds.Custom)
+
+      LazyRow(
+        contentPadding = PaddingValues(12.dp, 0.dp, 12.dp, 0.dp),
+        modifier = Modifier.onGloballyPositioned { layoutCoordinates ->
+          val position = layoutCoordinates.unclippedBoundsInWindow()
+          shimmerInstance.updateBounds(position)
+        }
+      ) {
+        if (animeSeasonSummer.isLoading) {
+          showShimmerPlaceholder(shimmerInstance)
+        } else {
+          items(animeSeasonSummer.data, key = { item -> item.malId }) { anime ->
             ItemAnimeSeason(
               modifier = Modifier
                 .width(160.dp)
