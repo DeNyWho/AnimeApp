@@ -18,12 +18,15 @@ import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import com.example.anibox.core.enum.ContentType
 import com.example.anibox.presenter.home.composable.ItemAnimeSeason
+import com.example.anibox.presenter.home.state.popular.AnimePopularState
 import com.example.anibox.presenter.home.state.seasons.AnimeAutumnState
 import com.example.anibox.presenter.home.state.seasons.AnimeSpringState
 import com.example.anibox.presenter.home.state.seasons.AnimeSummerState
 import com.example.anibox.presenter.home.state.seasons.AnimeWinterState
 import com.example.anibox.presenter.home.view_holder.ItemAnimeTopShimmer
+import com.example.animeapp.presentation.screens.home.anime_popular.AnimeAiringPopularHorizontalPager
 import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.rememberPagerState
 import com.valentinilk.shimmer.Shimmer
 import com.valentinilk.shimmer.ShimmerBounds
 import com.valentinilk.shimmer.rememberShimmer
@@ -33,7 +36,7 @@ import com.valentinilk.shimmer.unclippedBoundsInWindow
 @ExperimentalCoilApi
 @Composable
 fun HomeContentList(
-//  animeAiringPopularState: AnimePopularState = AnimePopularState(),
+  animeAiringPopularState: AnimePopularState = AnimePopularState(),
   animeSeasonAutumn: AnimeAutumnState = AnimeAutumnState(),
   animeSeasonWinter: AnimeWinterState = AnimeWinterState(),
   animeSeasonSummer: AnimeSummerState = AnimeSummerState(),
@@ -46,22 +49,22 @@ fun HomeContentList(
     state = lazyColumnState,
   ) {
     // Start of Currently popular anime
-//    item(key = "horizontal_pager") {
-//      val shimmerInstance = rememberShimmer(shimmerBounds = ShimmerBounds.Custom)
-//      val pagerState = rememberPagerState()
-//      val itemCount = animeAiringPopularState.data.size.coerceAtMost(7)
-//      AnimeAiringPopularHorizontalPager(
-//        modifier = Modifier.onGloballyPositioned { layoutCoordinates ->
-//          val position = layoutCoordinates.unclippedBoundsInWindow()
-//          shimmerInstance.updateBounds(position)
-//        },
-//        pagerState = pagerState,
-//        data = animeAiringPopularState.data.slice(0 until itemCount),
-//        shimmerInstance = shimmerInstance,
-////        onItemClick = onTopAnimeClick
-//      )
-//
-//    }
+    item(key = "horizontal_pager") {
+      val shimmerInstance = rememberShimmer(shimmerBounds = ShimmerBounds.Custom)
+      val pagerState = rememberPagerState()
+      val itemCount = animeAiringPopularState.data.size.coerceAtMost(7)
+      AnimeAiringPopularHorizontalPager(
+        modifier = Modifier.onGloballyPositioned { layoutCoordinates ->
+          val position = layoutCoordinates.unclippedBoundsInWindow()
+          shimmerInstance.updateBounds(position)
+        },
+        pagerState = pagerState,
+        data = animeAiringPopularState.data.slice(0 until itemCount),
+        shimmerInstance = shimmerInstance,
+//        onItemClick = onTopAnimeClick
+      )
+
+    }
     item(key = "winter") {
       Row(
         modifier = Modifier.padding(start = 18.dp, end = 18.dp, bottom = 4.dp),

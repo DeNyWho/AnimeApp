@@ -48,7 +48,7 @@ fun HomeScreen(
     val year = now.toLocalDateTime(TimeZone.currentSystemDefault()).year
     LaunchedEffect(viewModel) {
         withContext(Dispatchers.IO) {
-//            viewModel.getAnimeAiringPopular()
+            viewModel.getAnimeAiringPopular()
             delay(1500)
             viewModel.getAnimeWinter(year = year, season = "winter")
             delay(1500)
@@ -106,7 +106,7 @@ fun HomeScreen(
                 animeSeasonWinter = animeWinter,
                 animeSeasonSpring = animeSpring,
                 animeSeasonSummer = animeSummer,
-//                animeAiringPopularState = animeAiringPopularState,
+                animeAiringPopularState = animeAiringPopularState,
                 onTopAnimeClick = onContentClick,
                 lazyColumnState = lazyColumnState
             )
