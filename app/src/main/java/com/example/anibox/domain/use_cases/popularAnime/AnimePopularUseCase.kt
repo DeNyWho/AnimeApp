@@ -5,7 +5,7 @@ import com.example.anibox.core.wrapper.Event
 import com.example.anibox.core.wrapper.Resource
 import com.example.anibox.data.remote.models.anime.dto.toAnimeAiringPopular
 import com.example.anibox.data.repository.AnimeRepository
-import com.example.anibox.presenter.home.state.popular.AnimePopularState
+import com.example.anibox.presentation.home.state.popular.AnimePopularState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn

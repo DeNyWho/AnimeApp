@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.anibox.ui.theme.BlackLighterBackground
 import com.example.anibox.ui.theme.smokyWhite
-import com.example.anibox.presenter.home.composable.SearchEditText
+import com.example.anibox.presentation.home.composable.SearchEditText
 
 @Composable
 fun CustomTextField(

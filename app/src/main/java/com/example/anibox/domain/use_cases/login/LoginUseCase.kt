@@ -6,7 +6,7 @@ import com.example.anibox.data.repository.AnimeRepository
 import com.example.anibox.util.SessionManager
 import com.example.animeapp.data.remote.models.user.User
 import com.example.animeapp.data.remote.models.user.UserLoginDto
-import com.example.anibox.presenter.account.state.UserState
+import com.example.anibox.presentation.account.state.UserState
 import timber.log.Timber
 import javax.inject.Inject
 

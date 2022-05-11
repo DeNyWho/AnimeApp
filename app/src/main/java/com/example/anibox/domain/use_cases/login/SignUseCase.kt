@@ -3,7 +3,7 @@ package com.example.anibox.domain.use_cases.login
 import com.example.anibox.core.wrapper.Event
 import com.example.anibox.core.wrapper.Resource
 import com.example.anibox.data.repository.AnimeRepository
-import com.example.anibox.presenter.account.state.SignUpState
+import com.example.anibox.presentation.account.state.SignUpState
 import com.example.anibox.util.SessionManager
 import com.example.animeapp.data.remote.models.user.User
 import com.example.animeapp.data.remote.models.user.UserDto

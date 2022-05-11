@@ -21,11 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.anibox.R
-import com.example.anibox.presenter.home.HomeScreen
-import com.example.anibox.presenter.myList.MyList
-import com.example.anibox.presenter.notifications.Notifications
-import com.example.anibox.presenter.profile.Profile
-import com.example.anibox.presenter.search.Search
+import com.example.anibox.presentation.home.HomeScreen
+import com.example.anibox.presentation.myList.MyList
+import com.example.anibox.presentation.notifications.Notifications
+import com.example.anibox.presentation.profile.Profile
+import com.example.anibox.presentation.search.Search
 import com.example.anibox.ui.theme.blacker
 import com.example.anibox.ui.theme.smokyWhite
 

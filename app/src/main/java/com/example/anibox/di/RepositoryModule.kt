@@ -3,15 +3,17 @@ package com.example.anibox.di
 import android.content.Context
 import com.example.anibox.core.DispatchersProvider
 import com.example.anibox.data.repository.AnimeRepository
+import com.example.anibox.data.repository.DataStoreOperationsImpl
+import com.example.anibox.data.repository.Repository
 import com.example.anibox.domain.repository.DataStoreOperations
 import com.example.anibox.domain.use_cases.UseCases
 import com.example.anibox.domain.use_cases.login.read_onlogin.ReadOnLoginUseCase
+import com.example.anibox.domain.use_cases.mangaTop.GetMangaTopUseCase
 import com.example.anibox.domain.use_cases.popularAnime.AnimePopularUseCase
 import com.example.anibox.domain.use_cases.seasons.*
 import com.example.anibox.domain.use_cases.splash.read_onboarding.ReadOnBoardingUseCase
 import com.example.anibox.domain.use_cases.splash.save_onboarding.SaveOnBoardingUseCase
-import com.example.anibox.data.repository.DataStoreOperationsImpl
-import com.example.anibox.data.repository.Repository
+import com.example.anibox.domain.use_cases.topAnime.GetAnimeTopUseCase
 import com.example.animeapp.domain.use_cases.login.save_onlogin.SaveOnLoginUseCase
 import dagger.Module
 import dagger.Provides
@@ -46,6 +48,8 @@ object RepositoryModule {
             animeSummerUseCase = AnimeSummerUseCase(repository = animeRepository, dispatchers = dispatchers),
             animeSpringUseCase = AnimeSpringUseCase(repository = animeRepository, dispatchers = dispatchers),
             animeWinterUseCase = AnimeWinterUseCase(repository = animeRepository, dispatchers = dispatchers),
+            animeTop = GetAnimeTopUseCase(repository = animeRepository, dispatchers = dispatchers),
+            mangaTop = GetMangaTopUseCase(repository = animeRepository, dispatchers = dispatchers)
         )
     }
 }

@@ -8,6 +8,7 @@ import com.example.anibox.data.remote.api.AnimeService
 import com.example.anibox.data.remote.models.anime.dto.AnimeSeasonResponseV4
 import com.example.anibox.data.remote.models.anime.dto.AnimeTopResponse
 import com.example.anibox.data.remote.models.anime.dto.PopularAnimeResponse
+import com.example.anibox.data.remote.models.manga.dto.MangaTopResponse
 import com.example.anibox.di.AndroidKtorClient
 import com.example.animeapp.data.remote.models.user.UserDto
 import com.example.animeapp.data.remote.models.user.UserLoginDto
@@ -71,10 +72,26 @@ class AnimeRepository @Inject constructor(
                 host = Endpoints.HOST_V4
                 encodedPath = Endpoints.ANIME_TOP
                 parameter("page", page)
+                parameter("filter","bypopularity")
             }
         }
 
         return safeCall <AnimeTopResponse, GeneralError> (client, request)
+    }
+
+    override suspend fun getTopManga(page: Int): Resource<MangaTopResponse> {
+        val request = HttpRequestBuilder().apply {
+            method = HttpMethod.Get
+            url {
+                protocol = URLProtocol.HTTPS
+                host = Endpoints.HOST_V4
+                encodedPath = Endpoints.MANGA_TOP
+                parameter("page", page)
+                parameter("filter", "bypopularity")
+            }
+        }
+
+        return safeCall <MangaTopResponse, GeneralError> (client, request)
     }
 
     override suspend fun getLogin(user: UserLoginDto): Resource<UserResponse> {

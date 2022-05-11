@@ -5,8 +5,7 @@ import com.example.anibox.core.wrapper.Event
 import com.example.anibox.core.wrapper.Resource
 import com.example.anibox.data.remote.models.anime.dto.toAnimeSeason
 import com.example.anibox.data.repository.AnimeRepository
-import com.example.anibox.presenter.home.state.seasons.AnimeSpringState
-import kotlinx.coroutines.delay
+import com.example.anibox.presentation.home.state.seasons.AnimeSpringState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -19,7 +18,6 @@ class AnimeSpringUseCase @Inject constructor(
     operator fun invoke(year: Int, season: String): Flow<AnimeSpringState> {
         return flow {
             emit(AnimeSpringState(isLoading = true))
-            delay(1500)
 
             val state = when (val res = repository.getSeasonAnime(year,season)) {
                 is Resource.Success -> {

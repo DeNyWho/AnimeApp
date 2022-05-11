@@ -18,15 +18,15 @@ import com.example.anibox.core.DispatchersProvider
 import com.example.anibox.navigation.BottomNavTabs
 import com.example.anibox.navigation.NavScreen
 import com.example.anibox.navigation.Screen
-import com.example.anibox.presenter.account.UserViewModel
-import com.example.anibox.presenter.account.login.Login
-import com.example.anibox.presenter.account.signUp.SignUp
-import com.example.anibox.presenter.home.HomeScreen
-import com.example.anibox.presenter.home.HomeViewModel
-import com.example.anibox.presenter.splash.SplashScreen
-import com.example.anibox.presenter.splash.SplashViewModel
-import com.example.anibox.presenter.welcome.WelcomeScreen
-import com.example.anibox.presenter.welcome.WelcomeScreenViewModel
+import com.example.anibox.presentation.account.UserViewModel
+import com.example.anibox.presentation.account.login.Login
+import com.example.anibox.presentation.account.signUp.SignUp
+import com.example.anibox.presentation.home.HomeScreen
+import com.example.anibox.presentation.home.HomeViewModel
+import com.example.anibox.presentation.splash.SplashScreen
+import com.example.anibox.presentation.splash.SplashViewModel
+import com.example.anibox.presentation.welcome.WelcomeScreen
+import com.example.anibox.presentation.welcome.WelcomeScreenViewModel
 import com.example.anibox.ui.theme.AniBoxTheme
 import com.example.anibox.ui.theme.blackestBack
 import com.google.accompanist.insets.ProvideWindowInsets
@@ -83,9 +83,11 @@ fun MyApp(window: Window, dispatchers: DispatchersProvider) {
                 navController = navController,
                 viewModel = homeViewModel,
                 lazyColumnState = homeScrollState,
-                onSearchFieldClick = {}
             )
             NavScreen(selectedTab = selectedTab, navController = navController)
+        }
+
+        composable(Screen.Details.route) {
         }
 
         composable(Screen.Login.route) {

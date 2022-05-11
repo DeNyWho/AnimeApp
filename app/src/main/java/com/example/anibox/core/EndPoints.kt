@@ -16,6 +16,7 @@ object Endpoints {
 
     const val MANGA_SEARCH = "/search/manga"
     const val MANGA_DETAILS = "/manga"
+    const val MANGA_TOP = "/top/manga"
 
     const val HOST_V3 = "api.jikan.moe/v3"
     const val HOST_V4 = "api.jikan.moe/v4"

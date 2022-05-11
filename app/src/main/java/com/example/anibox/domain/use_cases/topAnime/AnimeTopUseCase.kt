@@ -5,7 +5,7 @@ import com.example.anibox.core.wrapper.Event
 import com.example.anibox.core.wrapper.Resource
 import com.example.anibox.data.remote.models.anime.dto.toAnimeTop
 import com.example.anibox.data.repository.AnimeRepository
-import com.example.anibox.presenter.home.data.AnimeTopState
+import com.example.anibox.presentation.home.data.AnimeTopState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
