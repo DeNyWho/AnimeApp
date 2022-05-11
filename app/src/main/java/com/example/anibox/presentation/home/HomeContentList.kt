@@ -6,12 +6,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.annotation.ExperimentalCoilApi
 import com.example.anibox.core.enum.ContentType
 import com.example.anibox.presentation.home.composable.ItemAnimeTop
@@ -20,6 +17,7 @@ import com.example.anibox.presentation.home.data.AnimeTopState
 import com.example.anibox.presentation.home.data.MangaTopState
 import com.example.anibox.presentation.home.state.popular.AnimePopularState
 import com.example.anibox.presentation.home.view_holder.ItemAnimeTopShimmer
+import com.example.anibox.ui.theme.nunitoType
 import com.example.animeapp.presentation.screens.home.anime_popular.AnimeAiringPopularHorizontalPager
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
@@ -56,7 +54,6 @@ fun HomeContentList(
         pagerState = pagerState,
         data = animeAiringPopularState.data.slice(0 until itemCount),
         shimmerInstance = shimmerInstance,
-//        onItemClick = onTopAnimeClick
       )
     }
 
@@ -68,13 +65,11 @@ fun HomeContentList(
       ) {
         Text(
           modifier = Modifier.weight(1f),
-          text = "Popular anime",
-          style = TextStyle(
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp
-          )
+          text = "Popular Anime",
+          style = nunitoType.h1,
+          fontWeight = FontWeight.Bold
         )
+
       }
 
       val shimmerInstance = rememberShimmer(shimmerBounds = ShimmerBounds.Custom)
@@ -110,11 +105,8 @@ fun HomeContentList(
         Text(
           modifier = Modifier.weight(1f),
           text = "Popular Manga",
-          style = TextStyle(
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 18.sp
-          )
+          style = nunitoType.h1,
+          fontWeight = FontWeight.Bold
         )
       }
 
