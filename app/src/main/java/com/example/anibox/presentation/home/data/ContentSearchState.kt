@@ -1,7 +1,7 @@
 package com.example.anibox.presentation.home.data
 
 import com.example.anibox.core.wrapper.Event
-import com.example.animeapp.domain.model.ContentSearch
+import com.example.anibox.domain.model.ContentSearch
 
 data class ContentSearchState(
     val data: List<ContentSearch> = listOf(),

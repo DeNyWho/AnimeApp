@@ -25,6 +25,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import timber.log.Timber
 
 
 @OptIn(ExperimentalCoilApi::class, ExperimentalCoroutinesApi::class)
@@ -36,6 +37,7 @@ fun HomeScreen(
     onContentClick: (String, Int) -> Unit = { type, id -> },
     modifier: Modifier = Modifier,
 ) {
+    Timber.i("ЧТО_ТО ПРОИСХОДИТ")
 
 //    LoadAnime()
     val now = Clock.System.now()
@@ -71,8 +73,9 @@ fun HomeScreen(
                 animeAiringPopularState = animeAiringPopularState,
                 animeTopState = animeTopState,
                 mangaTopState = mangaTopState,
-                onTopAnimeClick = onContentClick,
-                lazyColumnState = lazyColumnState
+                navController = navController,
+                lazyColumnState = lazyColumnState,
+                onContentClick = onContentClick
             )
         }
 //    if (isSystemInDarkTheme()) {

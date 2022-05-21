@@ -46,12 +46,12 @@ fun NavScreen(
         bottomBar = {
             if (!isSystemInDarkTheme()) {
                 BottomNavigation(
-                    modifier = Modifier.height(48.dp),
+                    modifier = Modifier.height(64.dp),
                     backgroundColor = smokyWhite,
                 ) {
                     for (tab in BottomNavTabs.values()) {
                         BottomNavigationItem(
-                            modifier = Modifier.fillMaxSize(),
+                            modifier = Modifier.fillMaxSize().weight(5f),
                             selected = selectedTab.value == tab,
                             onClick = {
                                 if (selectedTab.value == tab) return@BottomNavigationItem
@@ -60,8 +60,8 @@ fun NavScreen(
                             label = {
                                 Text(
                                     text = tab.label,
-                                    fontSize = 10.sp,
-                                    color = Color.Black,
+                                    fontSize = 9.sp,
+                                    color = Color.Black
                                 )
                             },
                             alwaysShowLabel = false,
@@ -70,7 +70,7 @@ fun NavScreen(
                                     painterResource(id = tab.icon),
                                     colorFilter = ColorFilter.tint(Color.Black),
                                     contentDescription = tab.label,
-                                    modifier = Modifier.size(20.dp),
+                                    modifier = Modifier.size(25.dp),
                                     contentScale = ContentScale.Crop
                                 )
 
@@ -80,7 +80,7 @@ fun NavScreen(
                 }
             } else {
                 BottomNavigation(
-                    modifier = Modifier.height(48.dp),
+                    modifier = Modifier.height(64.dp),
                     backgroundColor = blacker,
                     elevation = 16.dp
                 ) {
@@ -95,7 +95,7 @@ fun NavScreen(
                             label = {
                                 Text(
                                     text = tab.label,
-                                    fontSize = 10.sp,
+                                    fontSize = 9.sp,
                                     color = Color.White,
                                 )
                             },
@@ -105,7 +105,7 @@ fun NavScreen(
                                     painterResource(id = tab.icon),
                                     colorFilter = ColorFilter.tint(Color.White),
                                     contentDescription = tab.label,
-                                    modifier = Modifier.size(20.dp),
+                                    modifier = Modifier.size(25.dp),
                                     contentScale = ContentScale.Crop
                                 )
 
@@ -135,7 +135,7 @@ fun NavScreen(
                 navController
             )
             BottomNavTabs.Profile -> Profile(
-                navController = navController,
+                navController,
                 modifier
             )
         }

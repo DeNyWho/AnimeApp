@@ -1,6 +1,7 @@
 package com.example.anibox.presentation.home.anime_popular.composable
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -36,7 +37,7 @@ fun PagerScope.PagerItemAnimeAiringPopular(
   modifier: Modifier = Modifier,
   data: AnimeAiringPopular,
   currentPage: Int,
-//  onClick: () -> Unit
+  onClick: () -> Unit,
 ) {
 
   Surface(
@@ -74,7 +75,10 @@ fun PagerScope.PagerItemAnimeAiringPopular(
       modifier = modifier
         .fillMaxSize()
         .clip(RoundedCornerShape(12.dp))
-//        .clickable { onClick() }
+        .clickable {
+          onClick()
+          Timber.i("Тут какой-то клик")
+        }
     ) {
 
       val painter = rememberAsyncImagePainter(

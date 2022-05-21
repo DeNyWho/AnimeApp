@@ -1,6 +1,4 @@
-package com.example.anibox.data.remote.models.manga.dto
-
-import com.example.anibox.domain.model.manga.details.MangaTop
+import com.example.anibox.data.remote.models.common.ContentDetails
 import com.example.animeapp.data.remote.models.common.*
 import com.example.animeapp.data.remote.models.manga.Author
 import com.example.animeapp.data.remote.models.manga.Published
@@ -9,7 +7,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MangaTopDtoV4(
+data class MangaDetailsDtoV4(
     @SerialName("mal_id")
     val malId: Int = 0,
     @SerialName("url")
@@ -68,60 +66,46 @@ data class MangaTopDtoV4(
     val serializations: List<Serialization> = listOf()
 )
 
+fun MangaDetailsDtoV4.toContentDetails(): ContentDetails {
+    val combinedGenres = mutableListOf<Genre>()
 
-fun MangaTopDtoV4.toMangaTop(): MangaTop {
-    return MangaTop(
-        malId, rank, title,
-        url, images.jpg.imageUrl, type,
-        chapters,
-        members, score ?: 0.0
+    combinedGenres.apply {
+        addAll(genres)
+        addAll(explicitGenres.map { it.toGenre() })
+        addAll(themes.map { it.toGenre() })
+        addAll(demographics.map { it.toGenre() })
+    }
+
+    return ContentDetails(
+        malId = malId,
+        url = url,
+        images = images,
+        title = title,
+        titleEnglish = titleEnglish.orEmpty(),
+        titleJapanese = titleJapanese.orEmpty(),
+        titleSynonyms = titleSynonyms,
+        type = type,
+        status = status,
+        score = score ?: 0.0,
+        scoredBy = scoredBy ?: 0,
+        rank = rank,
+        popularity = popularity,
+        members = members,
+        favorites = favorites,
+        synopsis = synopsis,
+        background = background,
+        genres = combinedGenres,
+        explicitGenres = explicitGenres,
+        themes = themes,
+        demographics = demographics,
+
+        /* Manga Specific */
+        chapters = chapters,
+        volumes = volumes,
+        isPublishing = publishing,
+        published = published,
+        authors = authors,
+        serializations = serializations
+
     )
 }
-
-
-
-
-
-//fun MangaDetailsDtoV4.toContentDetails(): ContentDetails {
-//    val combinedGenres = mutableListOf<Genre>()
-//
-//    combinedGenres.apply {
-//        addAll(genres)
-//        addAll(explicitGenres.map { it.toGenre() })
-//        addAll(themes.map { it.toGenre() })
-//        addAll(demographics.map { it.toGenre() })
-//    }
-//
-//    return ContentDetails(
-//        malId = malId,
-//        url = url,
-//        images = images.jpg.imageUrl,
-//        title = title,
-//        titleEnglish = titleEnglish.orEmpty(),
-//        titleJapanese = titleJapanese.orEmpty(),
-//        titleSynonyms = titleSynonyms,
-//        type = type,
-//        status = status,
-//        score = score ?: 0.0,
-//        scoredBy = scoredBy ?: 0,
-//        rank = rank,
-//        popularity = popularity,
-//        members = members,
-//        favorites = favorites,
-//        synopsis = synopsis,
-//        background = background,
-//        genres = combinedGenres,
-//        explicitGenres = explicitGenres,
-//        themes = themes,
-//        demographics = demographics,
-//
-//        /* Manga Specific */
-//        chapters = chapters,
-//        volumes = volumes,
-//        isPublishing = publishing,
-//        published = published,
-//        authors = authors,
-//        serializations = serializations
-//
-//    )
-//}

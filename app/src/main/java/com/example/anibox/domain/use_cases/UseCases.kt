@@ -1,5 +1,6 @@
 package com.example.anibox.domain.use_cases
 
+import com.example.anibox.domain.use_cases.detail.GetDetailsUseCase
 import com.example.anibox.domain.use_cases.login.read_onlogin.ReadOnLoginUseCase
 import com.example.anibox.domain.use_cases.mangaTop.GetMangaTopUseCase
 import com.example.anibox.domain.use_cases.popularAnime.AnimePopularUseCase
@@ -22,4 +23,5 @@ data class UseCases (
     val animeWinterUseCase: AnimeWinterUseCase,
     val animeTop: GetAnimeTopUseCase,
     val mangaTop: GetMangaTopUseCase,
+    val details: GetDetailsUseCase,
 )

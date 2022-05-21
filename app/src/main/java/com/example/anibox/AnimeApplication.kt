@@ -1,7 +1,6 @@
 package com.example.anibox
 
 import android.app.Application
-import androidx.viewbinding.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -9,8 +8,6 @@ import timber.log.Timber
 class AnimeApplication: Application(){
     override fun onCreate() {
         super.onCreate()
-        if(BuildConfig.DEBUG){
             Timber.plant(Timber.DebugTree())
-        }
     }
 }

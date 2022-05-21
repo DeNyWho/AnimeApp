@@ -2,11 +2,10 @@ package com.example.anibox.di
 
 import android.content.Context
 import com.example.anibox.core.DispatchersProvider
-import com.example.anibox.data.repository.AnimeRepository
-import com.example.anibox.data.repository.DataStoreOperationsImpl
-import com.example.anibox.data.repository.Repository
+import com.example.anibox.data.repository.*
 import com.example.anibox.domain.repository.DataStoreOperations
 import com.example.anibox.domain.use_cases.UseCases
+import com.example.anibox.domain.use_cases.detail.GetDetailsUseCase
 import com.example.anibox.domain.use_cases.login.read_onlogin.ReadOnLoginUseCase
 import com.example.anibox.domain.use_cases.mangaTop.GetMangaTopUseCase
 import com.example.anibox.domain.use_cases.popularAnime.AnimePopularUseCase
@@ -36,7 +35,13 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideUseCases(repository: Repository, animeRepository: AnimeRepository, dispatchers: DispatchersProvider): UseCases {
+    fun provideUseCases(
+        repository: Repository,
+        animeRepository: AnimeRepository,
+        mangaRepository: MangaRepository,
+        userRepository: UserRepository,
+        dispatchers: DispatchersProvider
+    ): UseCases {
         return UseCases(
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository = repository),
             readOnBoardingUseCase = ReadOnBoardingUseCase(repository = repository),
@@ -49,7 +54,9 @@ object RepositoryModule {
             animeSpringUseCase = AnimeSpringUseCase(repository = animeRepository, dispatchers = dispatchers),
             animeWinterUseCase = AnimeWinterUseCase(repository = animeRepository, dispatchers = dispatchers),
             animeTop = GetAnimeTopUseCase(repository = animeRepository, dispatchers = dispatchers),
-            mangaTop = GetMangaTopUseCase(repository = animeRepository, dispatchers = dispatchers)
+            mangaTop = GetMangaTopUseCase(repository = mangaRepository, dispatchers = dispatchers),
+            details = GetDetailsUseCase(animeRepository = animeRepository, dispatchers = dispatchers)
         )
+
     }
 }

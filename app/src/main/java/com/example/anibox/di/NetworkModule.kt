@@ -37,10 +37,6 @@ object NetworkModule {
         )
     }
 
-//    @Singleton
-//    @Provides
-//    fun provideGson() = Gson()
-
     @Provides
     @Singleton
     fun provideSessionManager(
@@ -93,10 +89,10 @@ object NetworkModule {
                     coerceInputValues = true
                 })
             }
-            install(Logging) {
-                logger = Logger.DEFAULT
-                level = LogLevel.HEADERS
-            }
+//            install(Logging) {
+//                logger = Logger.DEFAULT
+//                level = LogLevel.HEADERS
+//            }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.animeapp.presentation.screens.home.anime_popular
+package com.example.anibox.presentation.home.anime_popular
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -10,7 +10,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.example.anibox.core.enum.ContentType
 import com.example.anibox.domain.model.anime.AnimeAiringPopular
+import com.example.anibox.navigation.Screen
 import com.example.anibox.presentation.home.anime_popular.composable.PagerItemAnimeAiringPopular
 import com.example.anibox.presentation.home.anime_popular.composable.ShimmerHorizontalChipIndicator
 import com.example.anibox.presentation.home.anime_popular.composable.ShimmerPagerItemAnimeAiringPopular
@@ -33,7 +36,7 @@ fun AnimeAiringPopularHorizontalPager(
     pagerState: PagerState = rememberPagerState(),
     data: List<AnimeAiringPopular> = emptyList(),
     shimmerInstance: Shimmer,
-//    onItemClick: (String, Int) -> Unit
+    navController: NavHostController
 ) {
     val isLoading = animeAiringPopularState.isLoading
     val shownCount = if (isLoading) 3 else data.size
@@ -61,8 +64,8 @@ fun AnimeAiringPopularHorizontalPager(
                     modifier = Modifier,
                     data = data[page],
                     currentPage = page
-                )
-//                    onClick = { onItemClick(ContentType.Anime.name, data[page].malId) }
+                ) { navController.navigate("${Screen.Details.route}/${ContentType.Anime.name}/${data[page].malId}") }
+                Timber.i("navigated with ${Screen.Details.route}/${ContentType.Anime.name}/${data[page].malId}")
             }
         }
 

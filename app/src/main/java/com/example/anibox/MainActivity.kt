@@ -11,9 +11,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.anibox.core.DispatchersProvider
 import com.example.anibox.navigation.BottomNavTabs
 import com.example.anibox.navigation.NavScreen
@@ -21,6 +23,8 @@ import com.example.anibox.navigation.Screen
 import com.example.anibox.presentation.account.UserViewModel
 import com.example.anibox.presentation.account.login.Login
 import com.example.anibox.presentation.account.signUp.SignUp
+import com.example.anibox.presentation.detail.DetailsScreen
+import com.example.anibox.presentation.detail.DetailsViewModel
 import com.example.anibox.presentation.home.HomeScreen
 import com.example.anibox.presentation.home.HomeViewModel
 import com.example.anibox.presentation.splash.SplashScreen
@@ -56,7 +60,16 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
+private val detailsScreenArgs = listOf(
+    navArgument(name = "contentType") {
+        type = NavType.StringType
+        nullable = false
+    },
+    navArgument(name = "malId") {
+        type = NavType.IntType
+        nullable = false
+    }
+)
 
 @Composable
 fun MyApp(window: Window, dispatchers: DispatchersProvider) {
@@ -83,11 +96,37 @@ fun MyApp(window: Window, dispatchers: DispatchersProvider) {
                 navController = navController,
                 viewModel = homeViewModel,
                 lazyColumnState = homeScrollState,
+//                onContentClick = { type, malId ->
+//                    navController.navigate("${Screen.Details.route}/$type/$malId")
+//                    Timber.i("navigated with ${Screen.Details.route}/$type/$malId")
+//                }
             )
             NavScreen(selectedTab = selectedTab, navController = navController)
         }
 
-        composable(Screen.Details.route) {
+        composable(
+            "${Screen.Details.route}/{contentType}/{malId}",
+            arguments = detailsScreenArgs
+        ) {backStack ->
+            
+            OnDestinationChanged(
+                systemUiController = systemUiController,
+                color = Color.Transparent,
+                drawOverStatusBar = true,
+                window = window
+            )
+
+            val detailsViewModel = hiltViewModel<DetailsViewModel>()
+
+
+            DetailsScreen(
+                viewModel = detailsViewModel,
+                backStack.arguments?.getString("contentType")?.replaceFirstChar { it.uppercase() },
+                backStack.arguments?.getInt("malId"),
+                onBackPressed = { navController.navigateUp() }
+            )
+
+
         }
 
         composable(Screen.Login.route) {

@@ -3,9 +3,9 @@ package com.example.anibox.di
 import android.content.Context
 import androidx.room.Room
 import com.example.anibox.data.local.AnimeDataBase
+import com.example.anibox.data.repository.LocalDataSourceImpl
 import com.example.anibox.domain.repository.LocalDataSource
 import com.example.anibox.util.Constants.ANIME_DATABASE
-import com.example.anibox.data.repository.LocalDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

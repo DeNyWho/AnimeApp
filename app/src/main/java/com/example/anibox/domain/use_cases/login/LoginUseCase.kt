@@ -2,16 +2,16 @@ package com.example.anibox.domain.use_cases.login
 
 import com.example.anibox.core.wrapper.Event
 import com.example.anibox.core.wrapper.Resource
-import com.example.anibox.data.repository.AnimeRepository
+import com.example.anibox.data.repository.UserRepository
+import com.example.anibox.presentation.account.state.UserState
 import com.example.anibox.util.SessionManager
 import com.example.animeapp.data.remote.models.user.User
 import com.example.animeapp.data.remote.models.user.UserLoginDto
-import com.example.anibox.presentation.account.state.UserState
 import timber.log.Timber
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(
-    private val repository: AnimeRepository,
+    private val repository: UserRepository,
     private val sessionManager: SessionManager
 ) {
     suspend operator fun invoke(user: UserLoginDto): UserState {

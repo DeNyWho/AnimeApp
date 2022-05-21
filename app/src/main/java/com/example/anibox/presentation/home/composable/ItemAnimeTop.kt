@@ -52,7 +52,10 @@ fun ItemAnimeTop(
     Column(
         modifier = modifier
             .clip(RoundedCornerShape(12.dp))
-            .clickable { onItemClick() }
+            .clickable {
+                onItemClick()
+                Timber.d("Клик клик")
+            }
     ) {
         Box(
             modifier = Modifier
