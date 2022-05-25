@@ -9,6 +9,7 @@ import com.example.anibox.data.remote.models.anime.dto.AnimeDetailsDtoV4
 import com.example.anibox.data.remote.models.anime.dto.toContentDetails
 import com.example.anibox.data.remote.models.common.ContentDetails
 import com.example.anibox.data.repository.AnimeRepository
+import com.example.anibox.data.repository.MangaRepository
 import com.example.anibox.presentation.detail.state.ContentDetailsState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 class GetDetailsUseCase @Inject constructor(
     private val animeRepository: AnimeRepository,
-//    private val mangaRepository: MangaRepository,
+    private val mangaRepository: MangaRepository,
     private val dispatchers: DispatchersProvider
 ) {
     operator fun invoke(contentType: String?, malId: Int?): Flow<ContentDetailsState> {
@@ -28,7 +29,7 @@ class GetDetailsUseCase @Inject constructor(
             val type = ContentType.valueOf(contentType ?: "NoValue")
             val res = when(type) {
                 ContentType.Anime -> animeRepository.getAnimeDetails(malId ?: 0)
-//                ContentType.Manga -> mangaRepository.getMangaDetails(malId ?: 0)
+                ContentType.Manga -> mangaRepository.getMangaDetails(malId ?: 0)
                 else -> Resource.Error(MyError.UNKNOWN_ERROR)
             }
 

@@ -55,7 +55,7 @@ object RepositoryModule {
             animeWinterUseCase = AnimeWinterUseCase(repository = animeRepository, dispatchers = dispatchers),
             animeTop = GetAnimeTopUseCase(repository = animeRepository, dispatchers = dispatchers),
             mangaTop = GetMangaTopUseCase(repository = mangaRepository, dispatchers = dispatchers),
-            details = GetDetailsUseCase(animeRepository = animeRepository, dispatchers = dispatchers)
+            details = GetDetailsUseCase(animeRepository = animeRepository, dispatchers = dispatchers, mangaRepository = mangaRepository)
         )
 
     }

@@ -13,7 +13,6 @@ import com.example.animeapp.data.remote.models.user.UserSignResponse
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -34,7 +33,6 @@ class UserRepository @Inject constructor(
         return safeCall<UserResponse, GeneralError>(client, request)
     }
 
-    @OptIn(InternalAPI::class)
     override suspend fun getSign(user: UserDto): Resource<UserSignResponse> {
         val request = HttpRequestBuilder().apply {
             method = HttpMethod.Post

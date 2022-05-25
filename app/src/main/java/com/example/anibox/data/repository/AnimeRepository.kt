@@ -85,8 +85,6 @@ class AnimeRepository @Inject constructor(
 
         val res = safeCall<AnimeDetailsResponse, GeneralError>(client, request)
 
-        Timber.d("res repository ${res.data}")
-
         return if (res is Resource.Success && res.data != null) {
             Resource.Success(res.data.data)
         } else {

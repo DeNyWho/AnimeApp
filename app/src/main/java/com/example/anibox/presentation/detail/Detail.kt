@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,9 +19,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
+import com.example.anibox.presentation.detail.header.ContentDetailsScreenToolbar
 import com.example.anibox.ui.theme.BlackBackground
 import com.example.anibox.ui.theme.OnDarkSurface
 import com.example.animeapp.presentation.composable.CenterCircularProgressIndicator
+import me.onebone.toolbar.CollapsingToolbarScaffold
+import me.onebone.toolbar.ScrollStrategy
+import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 
 @Composable
 fun DetailsScreen(
@@ -31,7 +34,7 @@ fun DetailsScreen(
     malId: Int?,
     onBackPressed: () -> Boolean = { false }
 ) {
-//    val toolbarScaffoldState = rememberCollapsingToolbarScaffoldState()
+    val toolbarScaffoldState = rememberCollapsingToolbarScaffoldState()
     val contentDetailsState = viewModel.contentDetailsState.value
     val genres = contentDetailsState.data?.genres ?: listOf()
 
@@ -66,22 +69,21 @@ fun DetailsScreen(
             )
         }
     } else {
-//        CollapsingToolbarScaffold(
-        Scaffold(
+        CollapsingToolbarScaffold(
             modifier = Modifier
                 .fillMaxSize()
                 .background(BlackBackground),
-//            state = toolbarScaffoldState,
-//            scrollStrategy = ScrollStrategy.ExitUntilCollapsed,
-//            toolbar = {
-//                ContentDetailsScreenToolbar(
-//                    largeCoil = largeImageCoil,
-//                    smallCoil = smallImageCoil,
-//                    contentDetailsState = contentDetailsState,
-//                    toolbarScaffoldState = toolbarScaffoldState,
-//                    onArrowClick = onBackPressed
-//                )
-//            }
+            state = toolbarScaffoldState,
+            scrollStrategy = ScrollStrategy.ExitUntilCollapsed,
+            toolbar = {
+                ContentDetailsScreenToolbar(
+                    largeCoil = largeImageCoil,
+                    smallCoil = smallImageCoil,
+                    contentDetailsState = contentDetailsState,
+                    toolbarScaffoldState = toolbarScaffoldState,
+                    onArrowClick = onBackPressed
+                )
+            }
         ) {
             LazyColumn(
                 modifier = Modifier
